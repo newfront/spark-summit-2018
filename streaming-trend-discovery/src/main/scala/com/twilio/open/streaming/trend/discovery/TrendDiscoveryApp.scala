@@ -35,6 +35,10 @@ object TrendDiscoveryApp {
 
     logger.info(s"warehouse path: ${sparkSession.sharedState.warehousePath}")
 
+    // create instance of the monitored application
+    new TrendDiscoveryApp(config, sparkSession)
+      .monitoredRun()
+
   }
 
 }
