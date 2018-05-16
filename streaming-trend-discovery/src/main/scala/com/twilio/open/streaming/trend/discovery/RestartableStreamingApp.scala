@@ -1,10 +1,12 @@
 package com.twilio.open.streaming.trend.discovery
 
+import com.twilio.open.streaming.trend.discovery.config.Configuration
 import com.twilio.open.streaming.trend.discovery.listeners.SparkStreamingQueryListener
 import org.apache.spark.sql.SparkSession
 import org.slf4j.Logger
 
-trait StreamingApp {
+trait StreamingApp[+Configuration] {
+  val config: Configuration
   val logger: Logger
   def run(): Unit
 }
@@ -13,10 +15,8 @@ trait Restartable {
   def restart(): Unit
 }
 
-trait RestartableStreamingApp extends StreamingApp with Restartable {
+trait RestartableStreamingApp[T <: Configuration] extends StreamingApp[T] with Restartable {
   val spark: SparkSession
-
-
 
   val streamingQueryListener: SparkStreamingQueryListener = {
     new SparkStreamingQueryListener(spark, restart)

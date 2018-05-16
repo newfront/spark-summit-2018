@@ -1,4 +1,5 @@
 appName: "spark-call-analyzer"
+triggerInterval: "1 minute"
 
 sparkConfig:
   spark.scheduler.mode: "FIFO"

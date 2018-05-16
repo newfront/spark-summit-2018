@@ -33,6 +33,7 @@ sealed trait Configuration
 @SerialVersionUID(100L)
 case class AppConfiguration(
   appName: String,
+  triggerInterval: String,
   sparkConfig: Map[String, String],
   @JsonProperty("kafkaReader") kafkaDataStreamReader: KafkaReaderOrWriterConfig)
   extends Configuration with Serializable
