@@ -1,0 +1,36 @@
+option java_package="com.twilio.open.protocol";
+option java_outer_classname="Metrics";
+
+import "calls.proto";
+
+message MetricAggregation {
+  optional string metric               = 1;
+  optional Window window               = 2;
+  optional uint32 samples              = 3;
+  optional Stats stats                 = 4;
+  optional Dimensions dimensions       = 5;
+  optional string dimension_hash       = 10; // base64(murmur3(dimension.key:dimension.value))
+}
+
+message Window {
+  optional string start    = 1; // iso8601 start time of window
+  optional uint64 start_ms = 2; // unix epoch millis for window start
+  optional string interval = 3; // logical window interval (1m,5m,15m,1h,1d,1m) etc
+  optional string end      = 4; // iso8601 end time of window
+  optional uint64 end_ms   = 5; // unix epoch millis for window end
+}
+
+// typical statistics (can do similar with a describe on a col in a data frame with spark sql
+message Stats {
+  optional double min      = 1;
+  optional double p25      = 2;
+  optional double median   = 3;
+  optional double p75      = 4;
+  optional double p90      = 5;
+  optional double p95      = 6;
+  optional double p99      = 7;
+  optional double max      = 8;
+  optional double mean     = 9;
+  optional double sd       = 10;
+  optional double variance = 11;
+}

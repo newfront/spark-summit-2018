@@ -80,4 +80,5 @@ class TrendDiscoveryApp(override val config: AppConfiguration, override val spar
     // feed streaming data into fresh instance of TrendDetective   (broadcast updatable static DataFrame - from redis data)
     // feed final trends and delta (prior n aggs) through p95 threshold (prior k windows) (high/low) -> take high and send to Kafka for processing
   }
+
 }

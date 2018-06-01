@@ -1,0 +1,86 @@
+option java_package="com.twilio.open.protocol";
+option java_outer_classname="Calls";
+
+// start spark summit protocol
+enum CallState {
+  unknown_call_state  = 0;
+  initialized         = 1;
+  answered            = 2;
+  progress            = 3;
+  completed           = 4;
+  failed              = 5;
+}
+
+enum SignalingEventType {
+  unknown_event_type  = 0;
+  pdd                 = 1;
+  call_state          = 2;
+}
+
+message SignalingEvent {
+  optional string name                   = 1;
+  optional SignalingEventType event_type = 2;
+  optional PddEvent pdd                  = 3;
+  optional CallStateEvent call_state     = 4;
+}
+
+message PddEvent {
+  optional float pdd = 1;
+}
+
+message CallStateEvent {
+  optional CallState state = 1;
+}
+
+message CallEvent {
+  // when the event occured utc
+  optional uint64 event_time              = 1;
+  // when we received said event utc *** important ***
+  optional uint64 logged_event_time       = 2;
+  // unique identifier for said event - ** used for deduplication **
+  optional string event_id                = 3;
+  // used to store multiple types in this single extensible wrapper
+  optional CallEventType event_type       = 4;
+  // when event type is signaling_event this is available
+  optional SignalingEvent signaling_event = 5;
+}
+
+enum CallEventType {
+  unknown_call_event = 0;
+  signaling_event    = 1;
+}
+
+message Dimensions {
+  optional Country country     = 1;
+  optional Direction direction = 2;
+  optional Carrier carrier     = 3;
+}
+
+enum Country {
+  unknown_country = 0;
+  br              = 1; // brazil
+  ca              = 2; // canada
+  cl              = 3; // chile
+  fr              = 4; // france
+  gb              = 5; // great britain
+  in              = 6; // india
+  it              = 7; // italy
+  mx              = 8; // mexico
+  nl              = 9; // netherlands
+  us              = 10; // united states
+}
+
+enum Direction {
+  unknown_direction = 0;
+  inbound           = 1;
+  outbound          = 2;
+}
+
+enum Carrier {
+  unknown_carrier = 0;
+  telco_a         = 1;
+  telco_b         = 2;
+  telco_c         = 3;
+  telco_d         = 4;
+  telco_e         = 5;
+}

@@ -8,24 +8,6 @@
   <name>Spark Streaming Trend Discovery</name>
   <description>Spark Application to automatically identify changes in trends. Discover Patterns</description>
 
-  <repositories>
-    <repository>
-      <id>twilio.nexus</id>
-      <url>http://nexus.corp.twilio.com/content/groups/public</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>sonatype-nexus-releases</id>
-      <name>Sonatype Nexus Releases</name>
-      <url>http://oss.sonatype.org/content/repositories/releases</url>
-    </repository>
-  </repositories>
-
   <properties>
     <apache-spark.version>2.2.0</apache-spark.version>
     <guava.version>14.0.1</guava.version>
@@ -39,6 +21,7 @@
     <slf4j.version>1.7.5</slf4j.version>
     <kamon.version>0.6.7</kamon.version>
     <kafka.version>0.10.0.1</kafka.version>
+    <redis.version>2.8.1</redis.version>
   </properties>
 
   <dependencies>
@@ -164,6 +147,13 @@
       <groupId>org.apache.kafka</groupId>
       <artifactId>kafka-clients</artifactId>
       <version>${kafka.version}</version>
+    </dependency>
+
+    <!-- Redis -->
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>${redis.version}</version>
     </dependency>
 
     <!-- Protobuf JSON -->

@@ -1,8 +1,20 @@
 Streaming Trend Discovery: Real-Time Discovery in a Sea of Events
 
-Discovering trends in massive data sets doesn't come for free. There are core principals and ideaologies that must be followed in order to extract interesting patterns from your data.
+Discovering trends in massive data sets doesn't come for free. There are core principals and ideologies that must be followed in order to extract interesting patterns from your data.
 
 Core Principals of Valuable Data
 1. Data must be accurate. This is often overlooked and key to any future success in ML or Analytics
 2. Data must be complete (or close enough*). Data loss is a natural part of every pipeline architecture. It will happen, but building recoverability into a system from the start is easier than scrambling after the first inevitable INCIDENT. *some aggregations using HyperLogLog style alogrithms don't need 100% of the data.
 3. Data must be digestible. Defining Key Data Structures up front is tricky but necessary. What is required, what is optional, what denotes the validity of a record
+
+Feed Forward
+------------
+For simplicity in the example this will be done via Redis. This can be any reliable data store that allows for quick data fetches.
+
+
+Compiling Protobuf
+------------------
+cd /path/to/streaming-trend-discovery
+./generate_proto.sh ../src/main/resources/protobuf/ ../src/main/scala/ ../src/main/resources/protobuf/calls.proto
+./generate_proto.sh ../src/main/resources/protobuf/ ../src/main/scala/ ../src/main/resources/protobuf/metrics.proto
+------------------
