@@ -43,6 +43,8 @@ message CallEvent {
   optional CallEventType event_type       = 4;
   // when event type is signaling_event this is available
   optional SignalingEvent signaling_event = 5;
+  // use with the event_type and logical window to generate a strong groupingHashKey
+  optional Dimensions event_dimensions    = 6;
 }
 
 enum CallEventType {
