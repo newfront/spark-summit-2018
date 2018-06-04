@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Example ./generate_proto.sh ../src/main/resources/protobuf/ ../src/main/scala/ ../src/main/resources/protobuf/metrics.proto
+
 which protoc
 EXISTS=$?
 

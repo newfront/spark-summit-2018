@@ -27,75 +27,95 @@ public final class Metrics {
         getMetricBytes();
 
     /**
-     * <code>optional .Window window = 2;</code>
+     * <code>optional uint64 window_start = 2;</code>
      */
-    boolean hasWindow();
+    boolean hasWindowStart();
     /**
-     * <code>optional .Window window = 2;</code>
+     * <code>optional uint64 window_start = 2;</code>
      */
-    com.twilio.open.protocol.Metrics.Window getWindow();
-    /**
-     * <code>optional .Window window = 2;</code>
-     */
-    com.twilio.open.protocol.Metrics.WindowOrBuilder getWindowOrBuilder();
+    long getWindowStart();
 
     /**
-     * <code>optional uint32 samples = 3;</code>
+     * <code>optional uint64 window_end = 3;</code>
+     */
+    boolean hasWindowEnd();
+    /**
+     * <code>optional uint64 window_end = 3;</code>
+     */
+    long getWindowEnd();
+
+    /**
+     * <code>optional string window_interval = 4;</code>
+     */
+    boolean hasWindowInterval();
+    /**
+     * <code>optional string window_interval = 4;</code>
+     */
+    java.lang.String getWindowInterval();
+    /**
+     * <code>optional string window_interval = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getWindowIntervalBytes();
+
+    /**
+     * <code>optional uint32 samples = 5;</code>
      */
     boolean hasSamples();
     /**
-     * <code>optional uint32 samples = 3;</code>
+     * <code>optional uint32 samples = 5;</code>
      */
     int getSamples();
 
     /**
-     * <code>optional .Stats stats = 4;</code>
+     * <code>optional .Stats stats = 6;</code>
      */
     boolean hasStats();
     /**
-     * <code>optional .Stats stats = 4;</code>
+     * <code>optional .Stats stats = 6;</code>
      */
     com.twilio.open.protocol.Metrics.Stats getStats();
     /**
-     * <code>optional .Stats stats = 4;</code>
+     * <code>optional .Stats stats = 6;</code>
      */
     com.twilio.open.protocol.Metrics.StatsOrBuilder getStatsOrBuilder();
 
     /**
-     * <code>optional .Dimensions dimensions = 5;</code>
+     * <code>optional .Histogram histogram = 7;</code>
+     */
+    boolean hasHistogram();
+    /**
+     * <code>optional .Histogram histogram = 7;</code>
+     */
+    com.twilio.open.protocol.Metrics.Histogram getHistogram();
+    /**
+     * <code>optional .Histogram histogram = 7;</code>
+     */
+    com.twilio.open.protocol.Metrics.HistogramOrBuilder getHistogramOrBuilder();
+
+    /**
+     * <code>optional .Dimensions dimensions = 8;</code>
      */
     boolean hasDimensions();
     /**
-     * <code>optional .Dimensions dimensions = 5;</code>
+     * <code>optional .Dimensions dimensions = 8;</code>
      */
     com.twilio.open.protocol.Calls.Dimensions getDimensions();
     /**
-     * <code>optional .Dimensions dimensions = 5;</code>
+     * <code>optional .Dimensions dimensions = 8;</code>
      */
     com.twilio.open.protocol.Calls.DimensionsOrBuilder getDimensionsOrBuilder();
 
     /**
      * <code>optional string dimension_hash = 10;</code>
-     *
-     * <pre>
-     * base64(murmur3(dimension.key:dimension.value))
-     * </pre>
      */
     boolean hasDimensionHash();
     /**
      * <code>optional string dimension_hash = 10;</code>
-     *
-     * <pre>
-     * base64(murmur3(dimension.key:dimension.value))
-     * </pre>
      */
     java.lang.String getDimensionHash();
     /**
      * <code>optional string dimension_hash = 10;</code>
-     *
-     * <pre>
-     * base64(murmur3(dimension.key:dimension.value))
-     * </pre>
      */
     com.google.protobuf.ByteString
         getDimensionHashBytes();
@@ -158,27 +178,30 @@ public final class Metrics {
               metric_ = bs;
               break;
             }
-            case 18: {
-              com.twilio.open.protocol.Metrics.Window.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000002) == 0x00000002)) {
-                subBuilder = window_.toBuilder();
-              }
-              window_ = input.readMessage(com.twilio.open.protocol.Metrics.Window.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(window_);
-                window_ = subBuilder.buildPartial();
-              }
+            case 16: {
               bitField0_ |= 0x00000002;
+              windowStart_ = input.readUInt64();
               break;
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              samples_ = input.readUInt32();
+              windowEnd_ = input.readUInt64();
               break;
             }
             case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              windowInterval_ = bs;
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              samples_ = input.readUInt32();
+              break;
+            }
+            case 50: {
               com.twilio.open.protocol.Metrics.Stats.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+              if (((bitField0_ & 0x00000020) == 0x00000020)) {
                 subBuilder = stats_.toBuilder();
               }
               stats_ = input.readMessage(com.twilio.open.protocol.Metrics.Stats.PARSER, extensionRegistry);
@@ -186,12 +209,25 @@ public final class Metrics {
                 subBuilder.mergeFrom(stats_);
                 stats_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000020;
               break;
             }
-            case 42: {
+            case 58: {
+              com.twilio.open.protocol.Metrics.Histogram.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000040) == 0x00000040)) {
+                subBuilder = histogram_.toBuilder();
+              }
+              histogram_ = input.readMessage(com.twilio.open.protocol.Metrics.Histogram.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(histogram_);
+                histogram_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000040;
+              break;
+            }
+            case 66: {
               com.twilio.open.protocol.Calls.Dimensions.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000010) == 0x00000010)) {
+              if (((bitField0_ & 0x00000080) == 0x00000080)) {
                 subBuilder = dimensions_.toBuilder();
               }
               dimensions_ = input.readMessage(com.twilio.open.protocol.Calls.Dimensions.PARSER, extensionRegistry);
@@ -199,12 +235,12 @@ public final class Metrics {
                 subBuilder.mergeFrom(dimensions_);
                 dimensions_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000080;
               break;
             }
             case 82: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000100;
               dimensionHash_ = bs;
               break;
             }
@@ -290,79 +326,151 @@ public final class Metrics {
       }
     }
 
-    public static final int WINDOW_FIELD_NUMBER = 2;
-    private com.twilio.open.protocol.Metrics.Window window_;
+    public static final int WINDOW_START_FIELD_NUMBER = 2;
+    private long windowStart_;
     /**
-     * <code>optional .Window window = 2;</code>
+     * <code>optional uint64 window_start = 2;</code>
      */
-    public boolean hasWindow() {
+    public boolean hasWindowStart() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .Window window = 2;</code>
+     * <code>optional uint64 window_start = 2;</code>
      */
-    public com.twilio.open.protocol.Metrics.Window getWindow() {
-      return window_;
-    }
-    /**
-     * <code>optional .Window window = 2;</code>
-     */
-    public com.twilio.open.protocol.Metrics.WindowOrBuilder getWindowOrBuilder() {
-      return window_;
+    public long getWindowStart() {
+      return windowStart_;
     }
 
-    public static final int SAMPLES_FIELD_NUMBER = 3;
-    private int samples_;
+    public static final int WINDOW_END_FIELD_NUMBER = 3;
+    private long windowEnd_;
     /**
-     * <code>optional uint32 samples = 3;</code>
+     * <code>optional uint64 window_end = 3;</code>
      */
-    public boolean hasSamples() {
+    public boolean hasWindowEnd() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional uint32 samples = 3;</code>
+     * <code>optional uint64 window_end = 3;</code>
+     */
+    public long getWindowEnd() {
+      return windowEnd_;
+    }
+
+    public static final int WINDOW_INTERVAL_FIELD_NUMBER = 4;
+    private java.lang.Object windowInterval_;
+    /**
+     * <code>optional string window_interval = 4;</code>
+     */
+    public boolean hasWindowInterval() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string window_interval = 4;</code>
+     */
+    public java.lang.String getWindowInterval() {
+      java.lang.Object ref = windowInterval_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          windowInterval_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string window_interval = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getWindowIntervalBytes() {
+      java.lang.Object ref = windowInterval_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        windowInterval_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SAMPLES_FIELD_NUMBER = 5;
+    private int samples_;
+    /**
+     * <code>optional uint32 samples = 5;</code>
+     */
+    public boolean hasSamples() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional uint32 samples = 5;</code>
      */
     public int getSamples() {
       return samples_;
     }
 
-    public static final int STATS_FIELD_NUMBER = 4;
+    public static final int STATS_FIELD_NUMBER = 6;
     private com.twilio.open.protocol.Metrics.Stats stats_;
     /**
-     * <code>optional .Stats stats = 4;</code>
+     * <code>optional .Stats stats = 6;</code>
      */
     public boolean hasStats() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional .Stats stats = 4;</code>
+     * <code>optional .Stats stats = 6;</code>
      */
     public com.twilio.open.protocol.Metrics.Stats getStats() {
       return stats_;
     }
     /**
-     * <code>optional .Stats stats = 4;</code>
+     * <code>optional .Stats stats = 6;</code>
      */
     public com.twilio.open.protocol.Metrics.StatsOrBuilder getStatsOrBuilder() {
       return stats_;
     }
 
-    public static final int DIMENSIONS_FIELD_NUMBER = 5;
-    private com.twilio.open.protocol.Calls.Dimensions dimensions_;
+    public static final int HISTOGRAM_FIELD_NUMBER = 7;
+    private com.twilio.open.protocol.Metrics.Histogram histogram_;
     /**
-     * <code>optional .Dimensions dimensions = 5;</code>
+     * <code>optional .Histogram histogram = 7;</code>
      */
-    public boolean hasDimensions() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+    public boolean hasHistogram() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
-     * <code>optional .Dimensions dimensions = 5;</code>
+     * <code>optional .Histogram histogram = 7;</code>
+     */
+    public com.twilio.open.protocol.Metrics.Histogram getHistogram() {
+      return histogram_;
+    }
+    /**
+     * <code>optional .Histogram histogram = 7;</code>
+     */
+    public com.twilio.open.protocol.Metrics.HistogramOrBuilder getHistogramOrBuilder() {
+      return histogram_;
+    }
+
+    public static final int DIMENSIONS_FIELD_NUMBER = 8;
+    private com.twilio.open.protocol.Calls.Dimensions dimensions_;
+    /**
+     * <code>optional .Dimensions dimensions = 8;</code>
+     */
+    public boolean hasDimensions() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional .Dimensions dimensions = 8;</code>
      */
     public com.twilio.open.protocol.Calls.Dimensions getDimensions() {
       return dimensions_;
     }
     /**
-     * <code>optional .Dimensions dimensions = 5;</code>
+     * <code>optional .Dimensions dimensions = 8;</code>
      */
     public com.twilio.open.protocol.Calls.DimensionsOrBuilder getDimensionsOrBuilder() {
       return dimensions_;
@@ -372,20 +480,12 @@ public final class Metrics {
     private java.lang.Object dimensionHash_;
     /**
      * <code>optional string dimension_hash = 10;</code>
-     *
-     * <pre>
-     * base64(murmur3(dimension.key:dimension.value))
-     * </pre>
      */
     public boolean hasDimensionHash() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional string dimension_hash = 10;</code>
-     *
-     * <pre>
-     * base64(murmur3(dimension.key:dimension.value))
-     * </pre>
      */
     public java.lang.String getDimensionHash() {
       java.lang.Object ref = dimensionHash_;
@@ -403,10 +503,6 @@ public final class Metrics {
     }
     /**
      * <code>optional string dimension_hash = 10;</code>
-     *
-     * <pre>
-     * base64(murmur3(dimension.key:dimension.value))
-     * </pre>
      */
     public com.google.protobuf.ByteString
         getDimensionHashBytes() {
@@ -424,9 +520,12 @@ public final class Metrics {
 
     private void initFields() {
       metric_ = "";
-      window_ = com.twilio.open.protocol.Metrics.Window.getDefaultInstance();
+      windowStart_ = 0L;
+      windowEnd_ = 0L;
+      windowInterval_ = "";
       samples_ = 0;
       stats_ = com.twilio.open.protocol.Metrics.Stats.getDefaultInstance();
+      histogram_ = com.twilio.open.protocol.Metrics.Histogram.getDefaultInstance();
       dimensions_ = com.twilio.open.protocol.Calls.Dimensions.getDefaultInstance();
       dimensionHash_ = "";
     }
@@ -447,18 +546,27 @@ public final class Metrics {
         output.writeBytes(1, getMetricBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, window_);
+        output.writeUInt64(2, windowStart_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeUInt32(3, samples_);
+        output.writeUInt64(3, windowEnd_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeMessage(4, stats_);
+        output.writeBytes(4, getWindowIntervalBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeMessage(5, dimensions_);
+        output.writeUInt32(5, samples_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeMessage(6, stats_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeMessage(7, histogram_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeMessage(8, dimensions_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeBytes(10, getDimensionHashBytes());
       }
       getUnknownFields().writeTo(output);
@@ -476,21 +584,33 @@ public final class Metrics {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, window_);
+          .computeUInt64Size(2, windowStart_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(3, samples_);
+          .computeUInt64Size(3, windowEnd_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, stats_);
+          .computeBytesSize(4, getWindowIntervalBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, dimensions_);
+          .computeUInt32Size(5, samples_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, stats_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, histogram_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, dimensions_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(10, getDimensionHashBytes());
       }
@@ -603,8 +723,8 @@ public final class Metrics {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getWindowFieldBuilder();
           getStatsFieldBuilder();
+          getHistogramFieldBuilder();
           getDimensionsFieldBuilder();
         }
       }
@@ -616,28 +736,34 @@ public final class Metrics {
         super.clear();
         metric_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (windowBuilder_ == null) {
-          window_ = com.twilio.open.protocol.Metrics.Window.getDefaultInstance();
-        } else {
-          windowBuilder_.clear();
-        }
+        windowStart_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
-        samples_ = 0;
+        windowEnd_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
+        windowInterval_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        samples_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         if (statsBuilder_ == null) {
           stats_ = com.twilio.open.protocol.Metrics.Stats.getDefaultInstance();
         } else {
           statsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000020);
+        if (histogramBuilder_ == null) {
+          histogram_ = com.twilio.open.protocol.Metrics.Histogram.getDefaultInstance();
+        } else {
+          histogramBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
         if (dimensionsBuilder_ == null) {
           dimensions_ = com.twilio.open.protocol.Calls.Dimensions.getDefaultInstance();
         } else {
           dimensionsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000080);
         dimensionHash_ = "";
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -673,33 +799,45 @@ public final class Metrics {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        if (windowBuilder_ == null) {
-          result.window_ = window_;
-        } else {
-          result.window_ = windowBuilder_.build();
-        }
+        result.windowStart_ = windowStart_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.samples_ = samples_;
+        result.windowEnd_ = windowEnd_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
+        }
+        result.windowInterval_ = windowInterval_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.samples_ = samples_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
         }
         if (statsBuilder_ == null) {
           result.stats_ = stats_;
         } else {
           result.stats_ = statsBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        if (histogramBuilder_ == null) {
+          result.histogram_ = histogram_;
+        } else {
+          result.histogram_ = histogramBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
         }
         if (dimensionsBuilder_ == null) {
           result.dimensions_ = dimensions_;
         } else {
           result.dimensions_ = dimensionsBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
         }
         result.dimensionHash_ = dimensionHash_;
         result.bitField0_ = to_bitField0_;
@@ -723,8 +861,16 @@ public final class Metrics {
           metric_ = other.metric_;
           onChanged();
         }
-        if (other.hasWindow()) {
-          mergeWindow(other.getWindow());
+        if (other.hasWindowStart()) {
+          setWindowStart(other.getWindowStart());
+        }
+        if (other.hasWindowEnd()) {
+          setWindowEnd(other.getWindowEnd());
+        }
+        if (other.hasWindowInterval()) {
+          bitField0_ |= 0x00000008;
+          windowInterval_ = other.windowInterval_;
+          onChanged();
         }
         if (other.hasSamples()) {
           setSamples(other.getSamples());
@@ -732,11 +878,14 @@ public final class Metrics {
         if (other.hasStats()) {
           mergeStats(other.getStats());
         }
+        if (other.hasHistogram()) {
+          mergeHistogram(other.getHistogram());
+        }
         if (other.hasDimensions()) {
           mergeDimensions(other.getDimensions());
         }
         if (other.hasDimensionHash()) {
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000100;
           dimensionHash_ = other.dimensionHash_;
           onChanged();
         }
@@ -843,149 +992,173 @@ public final class Metrics {
         return this;
       }
 
-      private com.twilio.open.protocol.Metrics.Window window_ = com.twilio.open.protocol.Metrics.Window.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.twilio.open.protocol.Metrics.Window, com.twilio.open.protocol.Metrics.Window.Builder, com.twilio.open.protocol.Metrics.WindowOrBuilder> windowBuilder_;
+      private long windowStart_ ;
       /**
-       * <code>optional .Window window = 2;</code>
+       * <code>optional uint64 window_start = 2;</code>
        */
-      public boolean hasWindow() {
+      public boolean hasWindowStart() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .Window window = 2;</code>
+       * <code>optional uint64 window_start = 2;</code>
        */
-      public com.twilio.open.protocol.Metrics.Window getWindow() {
-        if (windowBuilder_ == null) {
-          return window_;
-        } else {
-          return windowBuilder_.getMessage();
-        }
+      public long getWindowStart() {
+        return windowStart_;
       }
       /**
-       * <code>optional .Window window = 2;</code>
+       * <code>optional uint64 window_start = 2;</code>
        */
-      public Builder setWindow(com.twilio.open.protocol.Metrics.Window value) {
-        if (windowBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          window_ = value;
-          onChanged();
-        } else {
-          windowBuilder_.setMessage(value);
-        }
+      public Builder setWindowStart(long value) {
         bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>optional .Window window = 2;</code>
-       */
-      public Builder setWindow(
-          com.twilio.open.protocol.Metrics.Window.Builder builderForValue) {
-        if (windowBuilder_ == null) {
-          window_ = builderForValue.build();
-          onChanged();
-        } else {
-          windowBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>optional .Window window = 2;</code>
-       */
-      public Builder mergeWindow(com.twilio.open.protocol.Metrics.Window value) {
-        if (windowBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              window_ != com.twilio.open.protocol.Metrics.Window.getDefaultInstance()) {
-            window_ =
-              com.twilio.open.protocol.Metrics.Window.newBuilder(window_).mergeFrom(value).buildPartial();
-          } else {
-            window_ = value;
-          }
-          onChanged();
-        } else {
-          windowBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>optional .Window window = 2;</code>
-       */
-      public Builder clearWindow() {
-        if (windowBuilder_ == null) {
-          window_ = com.twilio.open.protocol.Metrics.Window.getDefaultInstance();
-          onChanged();
-        } else {
-          windowBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-      /**
-       * <code>optional .Window window = 2;</code>
-       */
-      public com.twilio.open.protocol.Metrics.Window.Builder getWindowBuilder() {
-        bitField0_ |= 0x00000002;
+        windowStart_ = value;
         onChanged();
-        return getWindowFieldBuilder().getBuilder();
+        return this;
       }
       /**
-       * <code>optional .Window window = 2;</code>
+       * <code>optional uint64 window_start = 2;</code>
        */
-      public com.twilio.open.protocol.Metrics.WindowOrBuilder getWindowOrBuilder() {
-        if (windowBuilder_ != null) {
-          return windowBuilder_.getMessageOrBuilder();
+      public Builder clearWindowStart() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        windowStart_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long windowEnd_ ;
+      /**
+       * <code>optional uint64 window_end = 3;</code>
+       */
+      public boolean hasWindowEnd() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional uint64 window_end = 3;</code>
+       */
+      public long getWindowEnd() {
+        return windowEnd_;
+      }
+      /**
+       * <code>optional uint64 window_end = 3;</code>
+       */
+      public Builder setWindowEnd(long value) {
+        bitField0_ |= 0x00000004;
+        windowEnd_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional uint64 window_end = 3;</code>
+       */
+      public Builder clearWindowEnd() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        windowEnd_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object windowInterval_ = "";
+      /**
+       * <code>optional string window_interval = 4;</code>
+       */
+      public boolean hasWindowInterval() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string window_interval = 4;</code>
+       */
+      public java.lang.String getWindowInterval() {
+        java.lang.Object ref = windowInterval_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            windowInterval_ = s;
+          }
+          return s;
         } else {
-          return window_;
+          return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional .Window window = 2;</code>
+       * <code>optional string window_interval = 4;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.twilio.open.protocol.Metrics.Window, com.twilio.open.protocol.Metrics.Window.Builder, com.twilio.open.protocol.Metrics.WindowOrBuilder> 
-          getWindowFieldBuilder() {
-        if (windowBuilder_ == null) {
-          windowBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.twilio.open.protocol.Metrics.Window, com.twilio.open.protocol.Metrics.Window.Builder, com.twilio.open.protocol.Metrics.WindowOrBuilder>(
-                  getWindow(),
-                  getParentForChildren(),
-                  isClean());
-          window_ = null;
+      public com.google.protobuf.ByteString
+          getWindowIntervalBytes() {
+        java.lang.Object ref = windowInterval_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          windowInterval_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
         }
-        return windowBuilder_;
+      }
+      /**
+       * <code>optional string window_interval = 4;</code>
+       */
+      public Builder setWindowInterval(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        windowInterval_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string window_interval = 4;</code>
+       */
+      public Builder clearWindowInterval() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        windowInterval_ = getDefaultInstance().getWindowInterval();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string window_interval = 4;</code>
+       */
+      public Builder setWindowIntervalBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        windowInterval_ = value;
+        onChanged();
+        return this;
       }
 
       private int samples_ ;
       /**
-       * <code>optional uint32 samples = 3;</code>
+       * <code>optional uint32 samples = 5;</code>
        */
       public boolean hasSamples() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional uint32 samples = 3;</code>
+       * <code>optional uint32 samples = 5;</code>
        */
       public int getSamples() {
         return samples_;
       }
       /**
-       * <code>optional uint32 samples = 3;</code>
+       * <code>optional uint32 samples = 5;</code>
        */
       public Builder setSamples(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000010;
         samples_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional uint32 samples = 3;</code>
+       * <code>optional uint32 samples = 5;</code>
        */
       public Builder clearSamples() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000010);
         samples_ = 0;
         onChanged();
         return this;
@@ -995,13 +1168,13 @@ public final class Metrics {
       private com.google.protobuf.SingleFieldBuilder<
           com.twilio.open.protocol.Metrics.Stats, com.twilio.open.protocol.Metrics.Stats.Builder, com.twilio.open.protocol.Metrics.StatsOrBuilder> statsBuilder_;
       /**
-       * <code>optional .Stats stats = 4;</code>
+       * <code>optional .Stats stats = 6;</code>
        */
       public boolean hasStats() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional .Stats stats = 4;</code>
+       * <code>optional .Stats stats = 6;</code>
        */
       public com.twilio.open.protocol.Metrics.Stats getStats() {
         if (statsBuilder_ == null) {
@@ -1011,7 +1184,7 @@ public final class Metrics {
         }
       }
       /**
-       * <code>optional .Stats stats = 4;</code>
+       * <code>optional .Stats stats = 6;</code>
        */
       public Builder setStats(com.twilio.open.protocol.Metrics.Stats value) {
         if (statsBuilder_ == null) {
@@ -1023,11 +1196,11 @@ public final class Metrics {
         } else {
           statsBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional .Stats stats = 4;</code>
+       * <code>optional .Stats stats = 6;</code>
        */
       public Builder setStats(
           com.twilio.open.protocol.Metrics.Stats.Builder builderForValue) {
@@ -1037,15 +1210,15 @@ public final class Metrics {
         } else {
           statsBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional .Stats stats = 4;</code>
+       * <code>optional .Stats stats = 6;</code>
        */
       public Builder mergeStats(com.twilio.open.protocol.Metrics.Stats value) {
         if (statsBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+          if (((bitField0_ & 0x00000020) == 0x00000020) &&
               stats_ != com.twilio.open.protocol.Metrics.Stats.getDefaultInstance()) {
             stats_ =
               com.twilio.open.protocol.Metrics.Stats.newBuilder(stats_).mergeFrom(value).buildPartial();
@@ -1056,11 +1229,11 @@ public final class Metrics {
         } else {
           statsBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional .Stats stats = 4;</code>
+       * <code>optional .Stats stats = 6;</code>
        */
       public Builder clearStats() {
         if (statsBuilder_ == null) {
@@ -1069,19 +1242,19 @@ public final class Metrics {
         } else {
           statsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       /**
-       * <code>optional .Stats stats = 4;</code>
+       * <code>optional .Stats stats = 6;</code>
        */
       public com.twilio.open.protocol.Metrics.Stats.Builder getStatsBuilder() {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000020;
         onChanged();
         return getStatsFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .Stats stats = 4;</code>
+       * <code>optional .Stats stats = 6;</code>
        */
       public com.twilio.open.protocol.Metrics.StatsOrBuilder getStatsOrBuilder() {
         if (statsBuilder_ != null) {
@@ -1091,7 +1264,7 @@ public final class Metrics {
         }
       }
       /**
-       * <code>optional .Stats stats = 4;</code>
+       * <code>optional .Stats stats = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.twilio.open.protocol.Metrics.Stats, com.twilio.open.protocol.Metrics.Stats.Builder, com.twilio.open.protocol.Metrics.StatsOrBuilder> 
@@ -1107,17 +1280,133 @@ public final class Metrics {
         return statsBuilder_;
       }
 
+      private com.twilio.open.protocol.Metrics.Histogram histogram_ = com.twilio.open.protocol.Metrics.Histogram.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.twilio.open.protocol.Metrics.Histogram, com.twilio.open.protocol.Metrics.Histogram.Builder, com.twilio.open.protocol.Metrics.HistogramOrBuilder> histogramBuilder_;
+      /**
+       * <code>optional .Histogram histogram = 7;</code>
+       */
+      public boolean hasHistogram() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional .Histogram histogram = 7;</code>
+       */
+      public com.twilio.open.protocol.Metrics.Histogram getHistogram() {
+        if (histogramBuilder_ == null) {
+          return histogram_;
+        } else {
+          return histogramBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .Histogram histogram = 7;</code>
+       */
+      public Builder setHistogram(com.twilio.open.protocol.Metrics.Histogram value) {
+        if (histogramBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          histogram_ = value;
+          onChanged();
+        } else {
+          histogramBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .Histogram histogram = 7;</code>
+       */
+      public Builder setHistogram(
+          com.twilio.open.protocol.Metrics.Histogram.Builder builderForValue) {
+        if (histogramBuilder_ == null) {
+          histogram_ = builderForValue.build();
+          onChanged();
+        } else {
+          histogramBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .Histogram histogram = 7;</code>
+       */
+      public Builder mergeHistogram(com.twilio.open.protocol.Metrics.Histogram value) {
+        if (histogramBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040) &&
+              histogram_ != com.twilio.open.protocol.Metrics.Histogram.getDefaultInstance()) {
+            histogram_ =
+              com.twilio.open.protocol.Metrics.Histogram.newBuilder(histogram_).mergeFrom(value).buildPartial();
+          } else {
+            histogram_ = value;
+          }
+          onChanged();
+        } else {
+          histogramBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .Histogram histogram = 7;</code>
+       */
+      public Builder clearHistogram() {
+        if (histogramBuilder_ == null) {
+          histogram_ = com.twilio.open.protocol.Metrics.Histogram.getDefaultInstance();
+          onChanged();
+        } else {
+          histogramBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+      /**
+       * <code>optional .Histogram histogram = 7;</code>
+       */
+      public com.twilio.open.protocol.Metrics.Histogram.Builder getHistogramBuilder() {
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return getHistogramFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .Histogram histogram = 7;</code>
+       */
+      public com.twilio.open.protocol.Metrics.HistogramOrBuilder getHistogramOrBuilder() {
+        if (histogramBuilder_ != null) {
+          return histogramBuilder_.getMessageOrBuilder();
+        } else {
+          return histogram_;
+        }
+      }
+      /**
+       * <code>optional .Histogram histogram = 7;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.twilio.open.protocol.Metrics.Histogram, com.twilio.open.protocol.Metrics.Histogram.Builder, com.twilio.open.protocol.Metrics.HistogramOrBuilder> 
+          getHistogramFieldBuilder() {
+        if (histogramBuilder_ == null) {
+          histogramBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.twilio.open.protocol.Metrics.Histogram, com.twilio.open.protocol.Metrics.Histogram.Builder, com.twilio.open.protocol.Metrics.HistogramOrBuilder>(
+                  getHistogram(),
+                  getParentForChildren(),
+                  isClean());
+          histogram_ = null;
+        }
+        return histogramBuilder_;
+      }
+
       private com.twilio.open.protocol.Calls.Dimensions dimensions_ = com.twilio.open.protocol.Calls.Dimensions.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.twilio.open.protocol.Calls.Dimensions, com.twilio.open.protocol.Calls.Dimensions.Builder, com.twilio.open.protocol.Calls.DimensionsOrBuilder> dimensionsBuilder_;
       /**
-       * <code>optional .Dimensions dimensions = 5;</code>
+       * <code>optional .Dimensions dimensions = 8;</code>
        */
       public boolean hasDimensions() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
-       * <code>optional .Dimensions dimensions = 5;</code>
+       * <code>optional .Dimensions dimensions = 8;</code>
        */
       public com.twilio.open.protocol.Calls.Dimensions getDimensions() {
         if (dimensionsBuilder_ == null) {
@@ -1127,7 +1416,7 @@ public final class Metrics {
         }
       }
       /**
-       * <code>optional .Dimensions dimensions = 5;</code>
+       * <code>optional .Dimensions dimensions = 8;</code>
        */
       public Builder setDimensions(com.twilio.open.protocol.Calls.Dimensions value) {
         if (dimensionsBuilder_ == null) {
@@ -1139,11 +1428,11 @@ public final class Metrics {
         } else {
           dimensionsBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000080;
         return this;
       }
       /**
-       * <code>optional .Dimensions dimensions = 5;</code>
+       * <code>optional .Dimensions dimensions = 8;</code>
        */
       public Builder setDimensions(
           com.twilio.open.protocol.Calls.Dimensions.Builder builderForValue) {
@@ -1153,15 +1442,15 @@ public final class Metrics {
         } else {
           dimensionsBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000080;
         return this;
       }
       /**
-       * <code>optional .Dimensions dimensions = 5;</code>
+       * <code>optional .Dimensions dimensions = 8;</code>
        */
       public Builder mergeDimensions(com.twilio.open.protocol.Calls.Dimensions value) {
         if (dimensionsBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+          if (((bitField0_ & 0x00000080) == 0x00000080) &&
               dimensions_ != com.twilio.open.protocol.Calls.Dimensions.getDefaultInstance()) {
             dimensions_ =
               com.twilio.open.protocol.Calls.Dimensions.newBuilder(dimensions_).mergeFrom(value).buildPartial();
@@ -1172,11 +1461,11 @@ public final class Metrics {
         } else {
           dimensionsBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000080;
         return this;
       }
       /**
-       * <code>optional .Dimensions dimensions = 5;</code>
+       * <code>optional .Dimensions dimensions = 8;</code>
        */
       public Builder clearDimensions() {
         if (dimensionsBuilder_ == null) {
@@ -1185,19 +1474,19 @@ public final class Metrics {
         } else {
           dimensionsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
       /**
-       * <code>optional .Dimensions dimensions = 5;</code>
+       * <code>optional .Dimensions dimensions = 8;</code>
        */
       public com.twilio.open.protocol.Calls.Dimensions.Builder getDimensionsBuilder() {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000080;
         onChanged();
         return getDimensionsFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .Dimensions dimensions = 5;</code>
+       * <code>optional .Dimensions dimensions = 8;</code>
        */
       public com.twilio.open.protocol.Calls.DimensionsOrBuilder getDimensionsOrBuilder() {
         if (dimensionsBuilder_ != null) {
@@ -1207,7 +1496,7 @@ public final class Metrics {
         }
       }
       /**
-       * <code>optional .Dimensions dimensions = 5;</code>
+       * <code>optional .Dimensions dimensions = 8;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.twilio.open.protocol.Calls.Dimensions, com.twilio.open.protocol.Calls.Dimensions.Builder, com.twilio.open.protocol.Calls.DimensionsOrBuilder> 
@@ -1226,20 +1515,12 @@ public final class Metrics {
       private java.lang.Object dimensionHash_ = "";
       /**
        * <code>optional string dimension_hash = 10;</code>
-       *
-       * <pre>
-       * base64(murmur3(dimension.key:dimension.value))
-       * </pre>
        */
       public boolean hasDimensionHash() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
        * <code>optional string dimension_hash = 10;</code>
-       *
-       * <pre>
-       * base64(murmur3(dimension.key:dimension.value))
-       * </pre>
        */
       public java.lang.String getDimensionHash() {
         java.lang.Object ref = dimensionHash_;
@@ -1257,10 +1538,6 @@ public final class Metrics {
       }
       /**
        * <code>optional string dimension_hash = 10;</code>
-       *
-       * <pre>
-       * base64(murmur3(dimension.key:dimension.value))
-       * </pre>
        */
       public com.google.protobuf.ByteString
           getDimensionHashBytes() {
@@ -1277,47 +1554,35 @@ public final class Metrics {
       }
       /**
        * <code>optional string dimension_hash = 10;</code>
-       *
-       * <pre>
-       * base64(murmur3(dimension.key:dimension.value))
-       * </pre>
        */
       public Builder setDimensionHash(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000100;
         dimensionHash_ = value;
         onChanged();
         return this;
       }
       /**
        * <code>optional string dimension_hash = 10;</code>
-       *
-       * <pre>
-       * base64(murmur3(dimension.key:dimension.value))
-       * </pre>
        */
       public Builder clearDimensionHash() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000100);
         dimensionHash_ = getDefaultInstance().getDimensionHash();
         onChanged();
         return this;
       }
       /**
        * <code>optional string dimension_hash = 10;</code>
-       *
-       * <pre>
-       * base64(murmur3(dimension.key:dimension.value))
-       * </pre>
        */
       public Builder setDimensionHashBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000100;
         dimensionHash_ = value;
         onChanged();
         return this;
@@ -3673,6 +3938,2524 @@ public final class Metrics {
     // @@protoc_insertion_point(class_scope:Stats)
   }
 
+  public interface HistogramOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:Histogram)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional double bin1 = 1;</code>
+     */
+    boolean hasBin1();
+    /**
+     * <code>optional double bin1 = 1;</code>
+     */
+    double getBin1();
+
+    /**
+     * <code>optional double bin2 = 2;</code>
+     */
+    boolean hasBin2();
+    /**
+     * <code>optional double bin2 = 2;</code>
+     */
+    double getBin2();
+
+    /**
+     * <code>optional double bin3 = 3;</code>
+     */
+    boolean hasBin3();
+    /**
+     * <code>optional double bin3 = 3;</code>
+     */
+    double getBin3();
+
+    /**
+     * <code>optional double bin4 = 4;</code>
+     */
+    boolean hasBin4();
+    /**
+     * <code>optional double bin4 = 4;</code>
+     */
+    double getBin4();
+
+    /**
+     * <code>optional double bin5 = 5;</code>
+     */
+    boolean hasBin5();
+    /**
+     * <code>optional double bin5 = 5;</code>
+     */
+    double getBin5();
+
+    /**
+     * <code>optional double bin6 = 6;</code>
+     */
+    boolean hasBin6();
+    /**
+     * <code>optional double bin6 = 6;</code>
+     */
+    double getBin6();
+  }
+  /**
+   * Protobuf type {@code Histogram}
+   */
+  public static final class Histogram extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:Histogram)
+      HistogramOrBuilder {
+    // Use Histogram.newBuilder() to construct.
+    private Histogram(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private Histogram(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Histogram defaultInstance;
+    public static Histogram getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public Histogram getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Histogram(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 9: {
+              bitField0_ |= 0x00000001;
+              bin1_ = input.readDouble();
+              break;
+            }
+            case 17: {
+              bitField0_ |= 0x00000002;
+              bin2_ = input.readDouble();
+              break;
+            }
+            case 25: {
+              bitField0_ |= 0x00000004;
+              bin3_ = input.readDouble();
+              break;
+            }
+            case 33: {
+              bitField0_ |= 0x00000008;
+              bin4_ = input.readDouble();
+              break;
+            }
+            case 41: {
+              bitField0_ |= 0x00000010;
+              bin5_ = input.readDouble();
+              break;
+            }
+            case 49: {
+              bitField0_ |= 0x00000020;
+              bin6_ = input.readDouble();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.twilio.open.protocol.Metrics.internal_static_Histogram_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.twilio.open.protocol.Metrics.internal_static_Histogram_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.twilio.open.protocol.Metrics.Histogram.class, com.twilio.open.protocol.Metrics.Histogram.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<Histogram> PARSER =
+        new com.google.protobuf.AbstractParser<Histogram>() {
+      public Histogram parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Histogram(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Histogram> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int BIN1_FIELD_NUMBER = 1;
+    private double bin1_;
+    /**
+     * <code>optional double bin1 = 1;</code>
+     */
+    public boolean hasBin1() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional double bin1 = 1;</code>
+     */
+    public double getBin1() {
+      return bin1_;
+    }
+
+    public static final int BIN2_FIELD_NUMBER = 2;
+    private double bin2_;
+    /**
+     * <code>optional double bin2 = 2;</code>
+     */
+    public boolean hasBin2() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional double bin2 = 2;</code>
+     */
+    public double getBin2() {
+      return bin2_;
+    }
+
+    public static final int BIN3_FIELD_NUMBER = 3;
+    private double bin3_;
+    /**
+     * <code>optional double bin3 = 3;</code>
+     */
+    public boolean hasBin3() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional double bin3 = 3;</code>
+     */
+    public double getBin3() {
+      return bin3_;
+    }
+
+    public static final int BIN4_FIELD_NUMBER = 4;
+    private double bin4_;
+    /**
+     * <code>optional double bin4 = 4;</code>
+     */
+    public boolean hasBin4() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional double bin4 = 4;</code>
+     */
+    public double getBin4() {
+      return bin4_;
+    }
+
+    public static final int BIN5_FIELD_NUMBER = 5;
+    private double bin5_;
+    /**
+     * <code>optional double bin5 = 5;</code>
+     */
+    public boolean hasBin5() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional double bin5 = 5;</code>
+     */
+    public double getBin5() {
+      return bin5_;
+    }
+
+    public static final int BIN6_FIELD_NUMBER = 6;
+    private double bin6_;
+    /**
+     * <code>optional double bin6 = 6;</code>
+     */
+    public boolean hasBin6() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional double bin6 = 6;</code>
+     */
+    public double getBin6() {
+      return bin6_;
+    }
+
+    private void initFields() {
+      bin1_ = 0D;
+      bin2_ = 0D;
+      bin3_ = 0D;
+      bin4_ = 0D;
+      bin5_ = 0D;
+      bin6_ = 0D;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeDouble(1, bin1_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeDouble(2, bin2_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeDouble(3, bin3_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeDouble(4, bin4_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeDouble(5, bin5_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeDouble(6, bin6_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(1, bin1_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(2, bin2_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(3, bin3_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(4, bin4_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(5, bin5_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(6, bin6_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.twilio.open.protocol.Metrics.Histogram parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.twilio.open.protocol.Metrics.Histogram parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.twilio.open.protocol.Metrics.Histogram parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.twilio.open.protocol.Metrics.Histogram parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.twilio.open.protocol.Metrics.Histogram parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.twilio.open.protocol.Metrics.Histogram parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.twilio.open.protocol.Metrics.Histogram parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.twilio.open.protocol.Metrics.Histogram parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.twilio.open.protocol.Metrics.Histogram parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.twilio.open.protocol.Metrics.Histogram parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.twilio.open.protocol.Metrics.Histogram prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code Histogram}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:Histogram)
+        com.twilio.open.protocol.Metrics.HistogramOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.twilio.open.protocol.Metrics.internal_static_Histogram_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.twilio.open.protocol.Metrics.internal_static_Histogram_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.twilio.open.protocol.Metrics.Histogram.class, com.twilio.open.protocol.Metrics.Histogram.Builder.class);
+      }
+
+      // Construct using com.twilio.open.protocol.Metrics.Histogram.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        bin1_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        bin2_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        bin3_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        bin4_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        bin5_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        bin6_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.twilio.open.protocol.Metrics.internal_static_Histogram_descriptor;
+      }
+
+      public com.twilio.open.protocol.Metrics.Histogram getDefaultInstanceForType() {
+        return com.twilio.open.protocol.Metrics.Histogram.getDefaultInstance();
+      }
+
+      public com.twilio.open.protocol.Metrics.Histogram build() {
+        com.twilio.open.protocol.Metrics.Histogram result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.twilio.open.protocol.Metrics.Histogram buildPartial() {
+        com.twilio.open.protocol.Metrics.Histogram result = new com.twilio.open.protocol.Metrics.Histogram(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.bin1_ = bin1_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.bin2_ = bin2_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.bin3_ = bin3_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.bin4_ = bin4_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.bin5_ = bin5_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.bin6_ = bin6_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.twilio.open.protocol.Metrics.Histogram) {
+          return mergeFrom((com.twilio.open.protocol.Metrics.Histogram)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.twilio.open.protocol.Metrics.Histogram other) {
+        if (other == com.twilio.open.protocol.Metrics.Histogram.getDefaultInstance()) return this;
+        if (other.hasBin1()) {
+          setBin1(other.getBin1());
+        }
+        if (other.hasBin2()) {
+          setBin2(other.getBin2());
+        }
+        if (other.hasBin3()) {
+          setBin3(other.getBin3());
+        }
+        if (other.hasBin4()) {
+          setBin4(other.getBin4());
+        }
+        if (other.hasBin5()) {
+          setBin5(other.getBin5());
+        }
+        if (other.hasBin6()) {
+          setBin6(other.getBin6());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.twilio.open.protocol.Metrics.Histogram parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.twilio.open.protocol.Metrics.Histogram) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private double bin1_ ;
+      /**
+       * <code>optional double bin1 = 1;</code>
+       */
+      public boolean hasBin1() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional double bin1 = 1;</code>
+       */
+      public double getBin1() {
+        return bin1_;
+      }
+      /**
+       * <code>optional double bin1 = 1;</code>
+       */
+      public Builder setBin1(double value) {
+        bitField0_ |= 0x00000001;
+        bin1_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double bin1 = 1;</code>
+       */
+      public Builder clearBin1() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        bin1_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private double bin2_ ;
+      /**
+       * <code>optional double bin2 = 2;</code>
+       */
+      public boolean hasBin2() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional double bin2 = 2;</code>
+       */
+      public double getBin2() {
+        return bin2_;
+      }
+      /**
+       * <code>optional double bin2 = 2;</code>
+       */
+      public Builder setBin2(double value) {
+        bitField0_ |= 0x00000002;
+        bin2_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double bin2 = 2;</code>
+       */
+      public Builder clearBin2() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        bin2_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private double bin3_ ;
+      /**
+       * <code>optional double bin3 = 3;</code>
+       */
+      public boolean hasBin3() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional double bin3 = 3;</code>
+       */
+      public double getBin3() {
+        return bin3_;
+      }
+      /**
+       * <code>optional double bin3 = 3;</code>
+       */
+      public Builder setBin3(double value) {
+        bitField0_ |= 0x00000004;
+        bin3_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double bin3 = 3;</code>
+       */
+      public Builder clearBin3() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        bin3_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private double bin4_ ;
+      /**
+       * <code>optional double bin4 = 4;</code>
+       */
+      public boolean hasBin4() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional double bin4 = 4;</code>
+       */
+      public double getBin4() {
+        return bin4_;
+      }
+      /**
+       * <code>optional double bin4 = 4;</code>
+       */
+      public Builder setBin4(double value) {
+        bitField0_ |= 0x00000008;
+        bin4_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double bin4 = 4;</code>
+       */
+      public Builder clearBin4() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        bin4_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private double bin5_ ;
+      /**
+       * <code>optional double bin5 = 5;</code>
+       */
+      public boolean hasBin5() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional double bin5 = 5;</code>
+       */
+      public double getBin5() {
+        return bin5_;
+      }
+      /**
+       * <code>optional double bin5 = 5;</code>
+       */
+      public Builder setBin5(double value) {
+        bitField0_ |= 0x00000010;
+        bin5_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double bin5 = 5;</code>
+       */
+      public Builder clearBin5() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        bin5_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private double bin6_ ;
+      /**
+       * <code>optional double bin6 = 6;</code>
+       */
+      public boolean hasBin6() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional double bin6 = 6;</code>
+       */
+      public double getBin6() {
+        return bin6_;
+      }
+      /**
+       * <code>optional double bin6 = 6;</code>
+       */
+      public Builder setBin6(double value) {
+        bitField0_ |= 0x00000020;
+        bin6_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double bin6 = 6;</code>
+       */
+      public Builder clearBin6() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        bin6_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:Histogram)
+    }
+
+    static {
+      defaultInstance = new Histogram(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:Histogram)
+  }
+
+  public interface MetricOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:Metric)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional uint64 timestamp = 1;</code>
+     */
+    boolean hasTimestamp();
+    /**
+     * <code>optional uint64 timestamp = 1;</code>
+     */
+    long getTimestamp();
+
+    /**
+     * <code>optional string group_key = 2;</code>
+     */
+    boolean hasGroupKey();
+    /**
+     * <code>optional string group_key = 2;</code>
+     */
+    java.lang.String getGroupKey();
+    /**
+     * <code>optional string group_key = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getGroupKeyBytes();
+
+    /**
+     * <code>optional string dimensional_hash = 3;</code>
+     */
+    boolean hasDimensionalHash();
+    /**
+     * <code>optional string dimensional_hash = 3;</code>
+     */
+    java.lang.String getDimensionalHash();
+    /**
+     * <code>optional string dimensional_hash = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getDimensionalHashBytes();
+
+    /**
+     * <code>optional string metric_name = 4;</code>
+     */
+    boolean hasMetricName();
+    /**
+     * <code>optional string metric_name = 4;</code>
+     */
+    java.lang.String getMetricName();
+    /**
+     * <code>optional string metric_name = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getMetricNameBytes();
+
+    /**
+     * <code>optional string label = 5;</code>
+     */
+    boolean hasLabel();
+    /**
+     * <code>optional string label = 5;</code>
+     */
+    java.lang.String getLabel();
+    /**
+     * <code>optional string label = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getLabelBytes();
+
+    /**
+     * <code>optional float value = 6;</code>
+     */
+    boolean hasValue();
+    /**
+     * <code>optional float value = 6;</code>
+     */
+    float getValue();
+
+    /**
+     * <code>optional string carrier = 7;</code>
+     */
+    boolean hasCarrier();
+    /**
+     * <code>optional string carrier = 7;</code>
+     */
+    java.lang.String getCarrier();
+    /**
+     * <code>optional string carrier = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getCarrierBytes();
+
+    /**
+     * <code>optional string country = 8;</code>
+     */
+    boolean hasCountry();
+    /**
+     * <code>optional string country = 8;</code>
+     */
+    java.lang.String getCountry();
+    /**
+     * <code>optional string country = 8;</code>
+     */
+    com.google.protobuf.ByteString
+        getCountryBytes();
+
+    /**
+     * <code>optional string route = 9;</code>
+     */
+    boolean hasRoute();
+    /**
+     * <code>optional string route = 9;</code>
+     */
+    java.lang.String getRoute();
+    /**
+     * <code>optional string route = 9;</code>
+     */
+    com.google.protobuf.ByteString
+        getRouteBytes();
+
+    /**
+     * <code>optional string direction = 10;</code>
+     */
+    boolean hasDirection();
+    /**
+     * <code>optional string direction = 10;</code>
+     */
+    java.lang.String getDirection();
+    /**
+     * <code>optional string direction = 10;</code>
+     */
+    com.google.protobuf.ByteString
+        getDirectionBytes();
+  }
+  /**
+   * Protobuf type {@code Metric}
+   */
+  public static final class Metric extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:Metric)
+      MetricOrBuilder {
+    // Use Metric.newBuilder() to construct.
+    private Metric(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private Metric(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Metric defaultInstance;
+    public static Metric getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public Metric getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Metric(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              timestamp_ = input.readUInt64();
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              groupKey_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              dimensionalHash_ = bs;
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              metricName_ = bs;
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              label_ = bs;
+              break;
+            }
+            case 53: {
+              bitField0_ |= 0x00000020;
+              value_ = input.readFloat();
+              break;
+            }
+            case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000040;
+              carrier_ = bs;
+              break;
+            }
+            case 66: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000080;
+              country_ = bs;
+              break;
+            }
+            case 74: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000100;
+              route_ = bs;
+              break;
+            }
+            case 82: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000200;
+              direction_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.twilio.open.protocol.Metrics.internal_static_Metric_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.twilio.open.protocol.Metrics.internal_static_Metric_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.twilio.open.protocol.Metrics.Metric.class, com.twilio.open.protocol.Metrics.Metric.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<Metric> PARSER =
+        new com.google.protobuf.AbstractParser<Metric>() {
+      public Metric parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Metric(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Metric> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int TIMESTAMP_FIELD_NUMBER = 1;
+    private long timestamp_;
+    /**
+     * <code>optional uint64 timestamp = 1;</code>
+     */
+    public boolean hasTimestamp() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional uint64 timestamp = 1;</code>
+     */
+    public long getTimestamp() {
+      return timestamp_;
+    }
+
+    public static final int GROUP_KEY_FIELD_NUMBER = 2;
+    private java.lang.Object groupKey_;
+    /**
+     * <code>optional string group_key = 2;</code>
+     */
+    public boolean hasGroupKey() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string group_key = 2;</code>
+     */
+    public java.lang.String getGroupKey() {
+      java.lang.Object ref = groupKey_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          groupKey_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string group_key = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getGroupKeyBytes() {
+      java.lang.Object ref = groupKey_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        groupKey_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DIMENSIONAL_HASH_FIELD_NUMBER = 3;
+    private java.lang.Object dimensionalHash_;
+    /**
+     * <code>optional string dimensional_hash = 3;</code>
+     */
+    public boolean hasDimensionalHash() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string dimensional_hash = 3;</code>
+     */
+    public java.lang.String getDimensionalHash() {
+      java.lang.Object ref = dimensionalHash_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          dimensionalHash_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string dimensional_hash = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDimensionalHashBytes() {
+      java.lang.Object ref = dimensionalHash_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dimensionalHash_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int METRIC_NAME_FIELD_NUMBER = 4;
+    private java.lang.Object metricName_;
+    /**
+     * <code>optional string metric_name = 4;</code>
+     */
+    public boolean hasMetricName() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string metric_name = 4;</code>
+     */
+    public java.lang.String getMetricName() {
+      java.lang.Object ref = metricName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          metricName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string metric_name = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMetricNameBytes() {
+      java.lang.Object ref = metricName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        metricName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int LABEL_FIELD_NUMBER = 5;
+    private java.lang.Object label_;
+    /**
+     * <code>optional string label = 5;</code>
+     */
+    public boolean hasLabel() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string label = 5;</code>
+     */
+    public java.lang.String getLabel() {
+      java.lang.Object ref = label_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          label_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string label = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getLabelBytes() {
+      java.lang.Object ref = label_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        label_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int VALUE_FIELD_NUMBER = 6;
+    private float value_;
+    /**
+     * <code>optional float value = 6;</code>
+     */
+    public boolean hasValue() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional float value = 6;</code>
+     */
+    public float getValue() {
+      return value_;
+    }
+
+    public static final int CARRIER_FIELD_NUMBER = 7;
+    private java.lang.Object carrier_;
+    /**
+     * <code>optional string carrier = 7;</code>
+     */
+    public boolean hasCarrier() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional string carrier = 7;</code>
+     */
+    public java.lang.String getCarrier() {
+      java.lang.Object ref = carrier_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          carrier_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string carrier = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCarrierBytes() {
+      java.lang.Object ref = carrier_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        carrier_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int COUNTRY_FIELD_NUMBER = 8;
+    private java.lang.Object country_;
+    /**
+     * <code>optional string country = 8;</code>
+     */
+    public boolean hasCountry() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional string country = 8;</code>
+     */
+    public java.lang.String getCountry() {
+      java.lang.Object ref = country_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          country_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string country = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCountryBytes() {
+      java.lang.Object ref = country_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        country_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ROUTE_FIELD_NUMBER = 9;
+    private java.lang.Object route_;
+    /**
+     * <code>optional string route = 9;</code>
+     */
+    public boolean hasRoute() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional string route = 9;</code>
+     */
+    public java.lang.String getRoute() {
+      java.lang.Object ref = route_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          route_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string route = 9;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRouteBytes() {
+      java.lang.Object ref = route_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        route_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DIRECTION_FIELD_NUMBER = 10;
+    private java.lang.Object direction_;
+    /**
+     * <code>optional string direction = 10;</code>
+     */
+    public boolean hasDirection() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional string direction = 10;</code>
+     */
+    public java.lang.String getDirection() {
+      java.lang.Object ref = direction_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          direction_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string direction = 10;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDirectionBytes() {
+      java.lang.Object ref = direction_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        direction_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      timestamp_ = 0L;
+      groupKey_ = "";
+      dimensionalHash_ = "";
+      metricName_ = "";
+      label_ = "";
+      value_ = 0F;
+      carrier_ = "";
+      country_ = "";
+      route_ = "";
+      direction_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt64(1, timestamp_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getGroupKeyBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getDimensionalHashBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getMetricNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getLabelBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeFloat(6, value_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, getCarrierBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(8, getCountryBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(9, getRouteBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeBytes(10, getDirectionBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(1, timestamp_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getGroupKeyBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getDimensionalHashBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getMetricNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getLabelBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(6, value_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getCarrierBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, getCountryBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(9, getRouteBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(10, getDirectionBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.twilio.open.protocol.Metrics.Metric parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.twilio.open.protocol.Metrics.Metric parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.twilio.open.protocol.Metrics.Metric parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.twilio.open.protocol.Metrics.Metric parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.twilio.open.protocol.Metrics.Metric parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.twilio.open.protocol.Metrics.Metric parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.twilio.open.protocol.Metrics.Metric parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.twilio.open.protocol.Metrics.Metric parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.twilio.open.protocol.Metrics.Metric parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.twilio.open.protocol.Metrics.Metric parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.twilio.open.protocol.Metrics.Metric prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code Metric}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:Metric)
+        com.twilio.open.protocol.Metrics.MetricOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.twilio.open.protocol.Metrics.internal_static_Metric_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.twilio.open.protocol.Metrics.internal_static_Metric_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.twilio.open.protocol.Metrics.Metric.class, com.twilio.open.protocol.Metrics.Metric.Builder.class);
+      }
+
+      // Construct using com.twilio.open.protocol.Metrics.Metric.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        timestamp_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        groupKey_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        dimensionalHash_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        metricName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        label_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        value_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        carrier_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
+        country_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
+        route_ = "";
+        bitField0_ = (bitField0_ & ~0x00000100);
+        direction_ = "";
+        bitField0_ = (bitField0_ & ~0x00000200);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.twilio.open.protocol.Metrics.internal_static_Metric_descriptor;
+      }
+
+      public com.twilio.open.protocol.Metrics.Metric getDefaultInstanceForType() {
+        return com.twilio.open.protocol.Metrics.Metric.getDefaultInstance();
+      }
+
+      public com.twilio.open.protocol.Metrics.Metric build() {
+        com.twilio.open.protocol.Metrics.Metric result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.twilio.open.protocol.Metrics.Metric buildPartial() {
+        com.twilio.open.protocol.Metrics.Metric result = new com.twilio.open.protocol.Metrics.Metric(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.timestamp_ = timestamp_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.groupKey_ = groupKey_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.dimensionalHash_ = dimensionalHash_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.metricName_ = metricName_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.label_ = label_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.value_ = value_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.carrier_ = carrier_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.country_ = country_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.route_ = route_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.direction_ = direction_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.twilio.open.protocol.Metrics.Metric) {
+          return mergeFrom((com.twilio.open.protocol.Metrics.Metric)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.twilio.open.protocol.Metrics.Metric other) {
+        if (other == com.twilio.open.protocol.Metrics.Metric.getDefaultInstance()) return this;
+        if (other.hasTimestamp()) {
+          setTimestamp(other.getTimestamp());
+        }
+        if (other.hasGroupKey()) {
+          bitField0_ |= 0x00000002;
+          groupKey_ = other.groupKey_;
+          onChanged();
+        }
+        if (other.hasDimensionalHash()) {
+          bitField0_ |= 0x00000004;
+          dimensionalHash_ = other.dimensionalHash_;
+          onChanged();
+        }
+        if (other.hasMetricName()) {
+          bitField0_ |= 0x00000008;
+          metricName_ = other.metricName_;
+          onChanged();
+        }
+        if (other.hasLabel()) {
+          bitField0_ |= 0x00000010;
+          label_ = other.label_;
+          onChanged();
+        }
+        if (other.hasValue()) {
+          setValue(other.getValue());
+        }
+        if (other.hasCarrier()) {
+          bitField0_ |= 0x00000040;
+          carrier_ = other.carrier_;
+          onChanged();
+        }
+        if (other.hasCountry()) {
+          bitField0_ |= 0x00000080;
+          country_ = other.country_;
+          onChanged();
+        }
+        if (other.hasRoute()) {
+          bitField0_ |= 0x00000100;
+          route_ = other.route_;
+          onChanged();
+        }
+        if (other.hasDirection()) {
+          bitField0_ |= 0x00000200;
+          direction_ = other.direction_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.twilio.open.protocol.Metrics.Metric parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.twilio.open.protocol.Metrics.Metric) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private long timestamp_ ;
+      /**
+       * <code>optional uint64 timestamp = 1;</code>
+       */
+      public boolean hasTimestamp() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional uint64 timestamp = 1;</code>
+       */
+      public long getTimestamp() {
+        return timestamp_;
+      }
+      /**
+       * <code>optional uint64 timestamp = 1;</code>
+       */
+      public Builder setTimestamp(long value) {
+        bitField0_ |= 0x00000001;
+        timestamp_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional uint64 timestamp = 1;</code>
+       */
+      public Builder clearTimestamp() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        timestamp_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object groupKey_ = "";
+      /**
+       * <code>optional string group_key = 2;</code>
+       */
+      public boolean hasGroupKey() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string group_key = 2;</code>
+       */
+      public java.lang.String getGroupKey() {
+        java.lang.Object ref = groupKey_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            groupKey_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string group_key = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getGroupKeyBytes() {
+        java.lang.Object ref = groupKey_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          groupKey_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string group_key = 2;</code>
+       */
+      public Builder setGroupKey(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        groupKey_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string group_key = 2;</code>
+       */
+      public Builder clearGroupKey() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        groupKey_ = getDefaultInstance().getGroupKey();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string group_key = 2;</code>
+       */
+      public Builder setGroupKeyBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        groupKey_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object dimensionalHash_ = "";
+      /**
+       * <code>optional string dimensional_hash = 3;</code>
+       */
+      public boolean hasDimensionalHash() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string dimensional_hash = 3;</code>
+       */
+      public java.lang.String getDimensionalHash() {
+        java.lang.Object ref = dimensionalHash_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            dimensionalHash_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string dimensional_hash = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDimensionalHashBytes() {
+        java.lang.Object ref = dimensionalHash_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          dimensionalHash_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string dimensional_hash = 3;</code>
+       */
+      public Builder setDimensionalHash(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        dimensionalHash_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string dimensional_hash = 3;</code>
+       */
+      public Builder clearDimensionalHash() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        dimensionalHash_ = getDefaultInstance().getDimensionalHash();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string dimensional_hash = 3;</code>
+       */
+      public Builder setDimensionalHashBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        dimensionalHash_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object metricName_ = "";
+      /**
+       * <code>optional string metric_name = 4;</code>
+       */
+      public boolean hasMetricName() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string metric_name = 4;</code>
+       */
+      public java.lang.String getMetricName() {
+        java.lang.Object ref = metricName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            metricName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string metric_name = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMetricNameBytes() {
+        java.lang.Object ref = metricName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          metricName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string metric_name = 4;</code>
+       */
+      public Builder setMetricName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        metricName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string metric_name = 4;</code>
+       */
+      public Builder clearMetricName() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        metricName_ = getDefaultInstance().getMetricName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string metric_name = 4;</code>
+       */
+      public Builder setMetricNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        metricName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object label_ = "";
+      /**
+       * <code>optional string label = 5;</code>
+       */
+      public boolean hasLabel() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string label = 5;</code>
+       */
+      public java.lang.String getLabel() {
+        java.lang.Object ref = label_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            label_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string label = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getLabelBytes() {
+        java.lang.Object ref = label_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          label_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string label = 5;</code>
+       */
+      public Builder setLabel(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        label_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string label = 5;</code>
+       */
+      public Builder clearLabel() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        label_ = getDefaultInstance().getLabel();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string label = 5;</code>
+       */
+      public Builder setLabelBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        label_ = value;
+        onChanged();
+        return this;
+      }
+
+      private float value_ ;
+      /**
+       * <code>optional float value = 6;</code>
+       */
+      public boolean hasValue() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional float value = 6;</code>
+       */
+      public float getValue() {
+        return value_;
+      }
+      /**
+       * <code>optional float value = 6;</code>
+       */
+      public Builder setValue(float value) {
+        bitField0_ |= 0x00000020;
+        value_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float value = 6;</code>
+       */
+      public Builder clearValue() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        value_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object carrier_ = "";
+      /**
+       * <code>optional string carrier = 7;</code>
+       */
+      public boolean hasCarrier() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional string carrier = 7;</code>
+       */
+      public java.lang.String getCarrier() {
+        java.lang.Object ref = carrier_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            carrier_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string carrier = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCarrierBytes() {
+        java.lang.Object ref = carrier_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          carrier_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string carrier = 7;</code>
+       */
+      public Builder setCarrier(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        carrier_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string carrier = 7;</code>
+       */
+      public Builder clearCarrier() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        carrier_ = getDefaultInstance().getCarrier();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string carrier = 7;</code>
+       */
+      public Builder setCarrierBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        carrier_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object country_ = "";
+      /**
+       * <code>optional string country = 8;</code>
+       */
+      public boolean hasCountry() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional string country = 8;</code>
+       */
+      public java.lang.String getCountry() {
+        java.lang.Object ref = country_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            country_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string country = 8;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCountryBytes() {
+        java.lang.Object ref = country_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          country_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string country = 8;</code>
+       */
+      public Builder setCountry(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        country_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string country = 8;</code>
+       */
+      public Builder clearCountry() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        country_ = getDefaultInstance().getCountry();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string country = 8;</code>
+       */
+      public Builder setCountryBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        country_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object route_ = "";
+      /**
+       * <code>optional string route = 9;</code>
+       */
+      public boolean hasRoute() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional string route = 9;</code>
+       */
+      public java.lang.String getRoute() {
+        java.lang.Object ref = route_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            route_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string route = 9;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRouteBytes() {
+        java.lang.Object ref = route_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          route_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string route = 9;</code>
+       */
+      public Builder setRoute(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        route_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string route = 9;</code>
+       */
+      public Builder clearRoute() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        route_ = getDefaultInstance().getRoute();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string route = 9;</code>
+       */
+      public Builder setRouteBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        route_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object direction_ = "";
+      /**
+       * <code>optional string direction = 10;</code>
+       */
+      public boolean hasDirection() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional string direction = 10;</code>
+       */
+      public java.lang.String getDirection() {
+        java.lang.Object ref = direction_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            direction_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string direction = 10;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDirectionBytes() {
+        java.lang.Object ref = direction_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          direction_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string direction = 10;</code>
+       */
+      public Builder setDirection(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        direction_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string direction = 10;</code>
+       */
+      public Builder clearDirection() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        direction_ = getDefaultInstance().getDirection();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string direction = 10;</code>
+       */
+      public Builder setDirectionBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        direction_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:Metric)
+    }
+
+    static {
+      defaultInstance = new Metric(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:Metric)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_MetricAggregation_descriptor;
   private static
@@ -3688,6 +6471,16 @@ public final class Metrics {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Stats_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Histogram_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_Histogram_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Metric_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_Metric_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3697,18 +6490,27 @@ public final class Metrics {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rmetrics.proto\032\013calls.proto\"\235\001\n\021MetricA" +
-      "ggregation\022\016\n\006metric\030\001 \001(\t\022\027\n\006window\030\002 \001" +
-      "(\0132\007.Window\022\017\n\007samples\030\003 \001(\r\022\025\n\005stats\030\004 " +
-      "\001(\0132\006.Stats\022\037\n\ndimensions\030\005 \001(\0132\013.Dimens" +
-      "ions\022\026\n\016dimension_hash\030\n \001(\t\"X\n\006Window\022\r" +
-      "\n\005start\030\001 \001(\t\022\020\n\010start_ms\030\002 \001(\004\022\020\n\010inter" +
-      "val\030\003 \001(\t\022\013\n\003end\030\004 \001(\t\022\016\n\006end_ms\030\005 \001(\004\"\236" +
-      "\001\n\005Stats\022\013\n\003min\030\001 \001(\001\022\013\n\003p25\030\002 \001(\001\022\016\n\006me" +
-      "dian\030\003 \001(\001\022\013\n\003p75\030\004 \001(\001\022\013\n\003p90\030\005 \001(\001\022\013\n\003" +
-      "p95\030\006 \001(\001\022\013\n\003p99\030\007 \001(\001\022\013\n\003max\030\010 \001(\001\022\014\n\004m",
-      "ean\030\t \001(\001\022\n\n\002sd\030\n \001(\001\022\020\n\010variance\030\013 \001(\001B" +
-      "#\n\030com.twilio.open.protocolB\007Metrics"
+      "\n\rmetrics.proto\032\013calls.proto\"\346\001\n\021MetricA" +
+      "ggregation\022\016\n\006metric\030\001 \001(\t\022\024\n\014window_sta" +
+      "rt\030\002 \001(\004\022\022\n\nwindow_end\030\003 \001(\004\022\027\n\017window_i" +
+      "nterval\030\004 \001(\t\022\017\n\007samples\030\005 \001(\r\022\025\n\005stats\030" +
+      "\006 \001(\0132\006.Stats\022\035\n\thistogram\030\007 \001(\0132\n.Histo" +
+      "gram\022\037\n\ndimensions\030\010 \001(\0132\013.Dimensions\022\026\n" +
+      "\016dimension_hash\030\n \001(\t\"X\n\006Window\022\r\n\005start" +
+      "\030\001 \001(\t\022\020\n\010start_ms\030\002 \001(\004\022\020\n\010interval\030\003 \001" +
+      "(\t\022\013\n\003end\030\004 \001(\t\022\016\n\006end_ms\030\005 \001(\004\"\236\001\n\005Stat" +
+      "s\022\013\n\003min\030\001 \001(\001\022\013\n\003p25\030\002 \001(\001\022\016\n\006median\030\003 ",
+      "\001(\001\022\013\n\003p75\030\004 \001(\001\022\013\n\003p90\030\005 \001(\001\022\013\n\003p95\030\006 \001" +
+      "(\001\022\013\n\003p99\030\007 \001(\001\022\013\n\003max\030\010 \001(\001\022\014\n\004mean\030\t \001" +
+      "(\001\022\n\n\002sd\030\n \001(\001\022\020\n\010variance\030\013 \001(\001\"_\n\tHist" +
+      "ogram\022\014\n\004bin1\030\001 \001(\001\022\014\n\004bin2\030\002 \001(\001\022\014\n\004bin" +
+      "3\030\003 \001(\001\022\014\n\004bin4\030\004 \001(\001\022\014\n\004bin5\030\005 \001(\001\022\014\n\004b" +
+      "in6\030\006 \001(\001\"\277\001\n\006Metric\022\021\n\ttimestamp\030\001 \001(\004\022" +
+      "\021\n\tgroup_key\030\002 \001(\t\022\030\n\020dimensional_hash\030\003" +
+      " \001(\t\022\023\n\013metric_name\030\004 \001(\t\022\r\n\005label\030\005 \001(\t" +
+      "\022\r\n\005value\030\006 \001(\002\022\017\n\007carrier\030\007 \001(\t\022\017\n\007coun" +
+      "try\030\010 \001(\t\022\r\n\005route\030\t \001(\t\022\021\n\tdirection\030\n ",
+      "\001(\tB#\n\030com.twilio.open.protocolB\007Metrics"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3728,7 +6530,7 @@ public final class Metrics {
     internal_static_MetricAggregation_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_MetricAggregation_descriptor,
-        new java.lang.String[] { "Metric", "Window", "Samples", "Stats", "Dimensions", "DimensionHash", });
+        new java.lang.String[] { "Metric", "WindowStart", "WindowEnd", "WindowInterval", "Samples", "Stats", "Histogram", "Dimensions", "DimensionHash", });
     internal_static_Window_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_Window_fieldAccessorTable = new
@@ -3741,6 +6543,18 @@ public final class Metrics {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_Stats_descriptor,
         new java.lang.String[] { "Min", "P25", "Median", "P75", "P90", "P95", "P99", "Max", "Mean", "Sd", "Variance", });
+    internal_static_Histogram_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_Histogram_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_Histogram_descriptor,
+        new java.lang.String[] { "Bin1", "Bin2", "Bin3", "Bin4", "Bin5", "Bin6", });
+    internal_static_Metric_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_Metric_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_Metric_descriptor,
+        new java.lang.String[] { "Timestamp", "GroupKey", "DimensionalHash", "MetricName", "Label", "Value", "Carrier", "Country", "Route", "Direction", });
     com.twilio.open.protocol.Calls.getDescriptor();
   }
 

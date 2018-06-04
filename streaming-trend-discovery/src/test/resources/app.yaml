@@ -1,22 +1,17 @@
-appName: "spark-call-analyzer"
-triggerInterval: "1 minute"
-
-sparkConfig:
+appName: "streaming-trends-aggregation"
+triggerInterval: "10 seconds"
+outputMode: "update"
+checkpointPath: "/tmp/streaming-trends-aggregation/"
+windowInterval: 5
+watermarkInterval: 10
+core:
   spark.scheduler.mode: "FIFO"
-  spark.port.maxRetries: 64
+  spark.port.maxRetries: 16
   spark.driver.cores: 2
   spark.driver.memory: "2g"
   spark.executor.cores: 1
   spark.executor.memory: "2g"
-  spark.dynamicAllocation.enabled: false
-  spark.streaming.stopGracefullyOnShutdown: true
-  spark.submit.deployMode: "client"
-  spark.streaming.backpressure.enabled: true
-  spark.streaming.kafka.maxRatePerPartition: 4800
-  spark.streaming.kafka.maxRetries: 20
-  spark.sql.shuffle.partitions: 256 #configure to scale horizontally
-  #spark.scheduler.allocation.file: "/conf/fairscheduler.xml" # spark.scheduler.mode: "FAIR"
-  spark.cores.max: 24
+  spark.cores.max: 4
   spark.serializer: org.apache.spark.serializer.KryoSerializer
   spark.fs.s3a.attempts.maximum: 100
   spark.fs.s3a.threads.max: 512
@@ -27,14 +22,13 @@ sparkConfig:
   spark.fs.s3a.experimental.input.fadvise: "random"
   spark.fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
 
-kafkaReader:
-  topic: "Call.Events"
+callEventsTopic:
+  topic: "spark.summit.call.events"
   subscriptionType: "subscribe"
   conf:
     kafka.bootstrap.servers: "localhost:9092"
     kafka.metrics.num.samples: 4
     startingOffsets: "earliest"
-    #endingOffsets: "latest"
     failOnDataLoss: false # set to true to fail the app when offsets are not available for assignment
     kafkaConsumer.pollTimeoutMs: 5000 # increase in case of higher latency connections to Kafka
     fetchOffset.numRetries: 20

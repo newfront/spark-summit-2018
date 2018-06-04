@@ -5,11 +5,14 @@ import "calls.proto";
 
 message MetricAggregation {
   optional string metric               = 1;
-  optional Window window               = 2;
-  optional uint32 samples              = 3;
-  optional Stats stats                 = 4;
-  optional Dimensions dimensions       = 5;
-  optional string dimension_hash       = 10; // base64(murmur3(dimension.key:dimension.value))
+  optional uint64 window_start         = 2;
+  optional uint64 window_end           = 3;
+  optional string window_interval      = 4;
+  optional uint32 samples              = 5;
+  optional Stats stats                 = 6;
+  optional Histogram histogram         = 7;
+  optional Dimensions dimensions       = 8;
+  optional string dimension_hash       = 10;
 }
 
 message Window {
@@ -33,4 +36,26 @@ message Stats {
   optional double mean     = 9;
   optional double sd       = 10;
   optional double variance = 11;
+}
+
+message Histogram {
+  optional double bin1    = 1;
+  optional double bin2    = 2;
+  optional double bin3    = 3;
+  optional double bin4    = 4;
+  optional double bin5    = 5;
+  optional double bin6    = 6;
+}
+
+message Metric {
+  optional uint64 timestamp        = 1;
+  optional string group_key        = 2;
+  optional string dimensional_hash = 3;
+  optional string metric_name      = 4;
+  optional string label            = 5;
+  optional float value             = 6;
+  optional string carrier          = 7;
+  optional string country          = 8;
+  optional string route            = 9;
+  optional string direction        = 10;
 }

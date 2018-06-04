@@ -5,10 +5,14 @@ option java_outer_classname="Calls";
 enum CallState {
   unknown_call_state  = 0;
   initialized         = 1;
-  answered            = 2;
-  progress            = 3;
-  completed           = 4;
-  failed              = 5;
+  ringing             = 2;
+  answered            = 3;
+  progress            = 4;
+  completed           = 5;
+  failed              = 6;
+  busy                = 7;
+  noanswer            = 8;
+  canceled            = 9;
 }
 
 enum SignalingEventType {
@@ -39,12 +43,14 @@ message CallEvent {
   optional uint64 logged_event_time       = 2;
   // unique identifier for said event - ** used for deduplication **
   optional string event_id                = 3;
+  // encapsulates a logical end to end route
+  optional string route_id                = 4;
   // used to store multiple types in this single extensible wrapper
-  optional CallEventType event_type       = 4;
+  optional CallEventType event_type       = 5;
   // when event type is signaling_event this is available
-  optional SignalingEvent signaling_event = 5;
+  optional SignalingEvent signaling_event = 6;
   // use with the event_type and logical window to generate a strong groupingHashKey
-  optional Dimensions event_dimensions    = 6;
+  optional Dimensions event_dimensions    = 7;
 }
 
 enum CallEventType {
@@ -56,6 +62,7 @@ message Dimensions {
   optional Country country     = 1;
   optional Direction direction = 2;
   optional Carrier carrier     = 3;
+  optional string route        = 4;
 }
 
 enum Country {

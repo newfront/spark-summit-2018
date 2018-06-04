@@ -1,14 +1,10 @@
 package com.twilio.open.streaming.trend.discovery
 
-import java.io._
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 
 import com.twilio.open.streaming.trend.discovery.protocol.{CallEvent, Dimensions}
 import org.scalatest.{FlatSpec, Matchers}
-
-trait SerializableProduct extends Product with Serializable
-case class SimpleClass(name:String, age:Int) extends SerializableProduct
 
 class DiscoveryUtilsSpec extends FlatSpec with Matchers {
 
@@ -29,7 +25,4 @@ class DiscoveryUtilsSpec extends FlatSpec with Matchers {
     val ceDeser = DiscoveryUtils.deserialize[CallEvent](ceSer)
     ce.equals(ceDeser)
   }
-
-  // example using protobuf ser/deser with Message and sub-Message
-
 }

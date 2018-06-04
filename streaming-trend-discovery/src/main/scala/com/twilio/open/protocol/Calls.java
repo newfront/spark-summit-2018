@@ -26,21 +26,37 @@ public final class Calls {
      */
     initialized(1, 1),
     /**
-     * <code>answered = 2;</code>
+     * <code>ringing = 2;</code>
      */
-    answered(2, 2),
+    ringing(2, 2),
     /**
-     * <code>progress = 3;</code>
+     * <code>answered = 3;</code>
      */
-    progress(3, 3),
+    answered(3, 3),
     /**
-     * <code>completed = 4;</code>
+     * <code>progress = 4;</code>
      */
-    completed(4, 4),
+    progress(4, 4),
     /**
-     * <code>failed = 5;</code>
+     * <code>completed = 5;</code>
      */
-    failed(5, 5),
+    completed(5, 5),
+    /**
+     * <code>failed = 6;</code>
+     */
+    failed(6, 6),
+    /**
+     * <code>busy = 7;</code>
+     */
+    busy(7, 7),
+    /**
+     * <code>noanswer = 8;</code>
+     */
+    noanswer(8, 8),
+    /**
+     * <code>canceled = 9;</code>
+     */
+    canceled(9, 9),
     ;
 
     /**
@@ -52,21 +68,37 @@ public final class Calls {
      */
     public static final int initialized_VALUE = 1;
     /**
-     * <code>answered = 2;</code>
+     * <code>ringing = 2;</code>
      */
-    public static final int answered_VALUE = 2;
+    public static final int ringing_VALUE = 2;
     /**
-     * <code>progress = 3;</code>
+     * <code>answered = 3;</code>
      */
-    public static final int progress_VALUE = 3;
+    public static final int answered_VALUE = 3;
     /**
-     * <code>completed = 4;</code>
+     * <code>progress = 4;</code>
      */
-    public static final int completed_VALUE = 4;
+    public static final int progress_VALUE = 4;
     /**
-     * <code>failed = 5;</code>
+     * <code>completed = 5;</code>
      */
-    public static final int failed_VALUE = 5;
+    public static final int completed_VALUE = 5;
+    /**
+     * <code>failed = 6;</code>
+     */
+    public static final int failed_VALUE = 6;
+    /**
+     * <code>busy = 7;</code>
+     */
+    public static final int busy_VALUE = 7;
+    /**
+     * <code>noanswer = 8;</code>
+     */
+    public static final int noanswer_VALUE = 8;
+    /**
+     * <code>canceled = 9;</code>
+     */
+    public static final int canceled_VALUE = 9;
 
 
     public final int getNumber() { return value; }
@@ -75,10 +107,14 @@ public final class Calls {
       switch (value) {
         case 0: return unknown_call_state;
         case 1: return initialized;
-        case 2: return answered;
-        case 3: return progress;
-        case 4: return completed;
-        case 5: return failed;
+        case 2: return ringing;
+        case 3: return answered;
+        case 4: return progress;
+        case 5: return completed;
+        case 6: return failed;
+        case 7: return busy;
+        case 8: return noanswer;
+        case 9: return canceled;
         default: return null;
       }
     }
@@ -2564,7 +2600,33 @@ public final class Calls {
         getEventIdBytes();
 
     /**
-     * <code>optional .CallEventType event_type = 4;</code>
+     * <code>optional string route_id = 4;</code>
+     *
+     * <pre>
+     * encapsulates a logical end to end route
+     * </pre>
+     */
+    boolean hasRouteId();
+    /**
+     * <code>optional string route_id = 4;</code>
+     *
+     * <pre>
+     * encapsulates a logical end to end route
+     * </pre>
+     */
+    java.lang.String getRouteId();
+    /**
+     * <code>optional string route_id = 4;</code>
+     *
+     * <pre>
+     * encapsulates a logical end to end route
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getRouteIdBytes();
+
+    /**
+     * <code>optional .CallEventType event_type = 5;</code>
      *
      * <pre>
      * used to store multiple types in this single extensible wrapper
@@ -2572,7 +2634,7 @@ public final class Calls {
      */
     boolean hasEventType();
     /**
-     * <code>optional .CallEventType event_type = 4;</code>
+     * <code>optional .CallEventType event_type = 5;</code>
      *
      * <pre>
      * used to store multiple types in this single extensible wrapper
@@ -2581,7 +2643,7 @@ public final class Calls {
     com.twilio.open.protocol.Calls.CallEventType getEventType();
 
     /**
-     * <code>optional .SignalingEvent signaling_event = 5;</code>
+     * <code>optional .SignalingEvent signaling_event = 6;</code>
      *
      * <pre>
      * when event type is signaling_event this is available
@@ -2589,7 +2651,7 @@ public final class Calls {
      */
     boolean hasSignalingEvent();
     /**
-     * <code>optional .SignalingEvent signaling_event = 5;</code>
+     * <code>optional .SignalingEvent signaling_event = 6;</code>
      *
      * <pre>
      * when event type is signaling_event this is available
@@ -2597,13 +2659,38 @@ public final class Calls {
      */
     com.twilio.open.protocol.Calls.SignalingEvent getSignalingEvent();
     /**
-     * <code>optional .SignalingEvent signaling_event = 5;</code>
+     * <code>optional .SignalingEvent signaling_event = 6;</code>
      *
      * <pre>
      * when event type is signaling_event this is available
      * </pre>
      */
     com.twilio.open.protocol.Calls.SignalingEventOrBuilder getSignalingEventOrBuilder();
+
+    /**
+     * <code>optional .Dimensions event_dimensions = 7;</code>
+     *
+     * <pre>
+     * use with the event_type and logical window to generate a strong groupingHashKey
+     * </pre>
+     */
+    boolean hasEventDimensions();
+    /**
+     * <code>optional .Dimensions event_dimensions = 7;</code>
+     *
+     * <pre>
+     * use with the event_type and logical window to generate a strong groupingHashKey
+     * </pre>
+     */
+    com.twilio.open.protocol.Calls.Dimensions getEventDimensions();
+    /**
+     * <code>optional .Dimensions event_dimensions = 7;</code>
+     *
+     * <pre>
+     * use with the event_type and logical window to generate a strong groupingHashKey
+     * </pre>
+     */
+    com.twilio.open.protocol.Calls.DimensionsOrBuilder getEventDimensionsOrBuilder();
   }
   /**
    * Protobuf type {@code CallEvent}
@@ -2673,20 +2760,26 @@ public final class Calls {
               eventId_ = bs;
               break;
             }
-            case 32: {
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              routeId_ = bs;
+              break;
+            }
+            case 40: {
               int rawValue = input.readEnum();
               com.twilio.open.protocol.Calls.CallEventType value = com.twilio.open.protocol.Calls.CallEventType.valueOf(rawValue);
               if (value == null) {
-                unknownFields.mergeVarintField(4, rawValue);
+                unknownFields.mergeVarintField(5, rawValue);
               } else {
-                bitField0_ |= 0x00000008;
+                bitField0_ |= 0x00000010;
                 eventType_ = value;
               }
               break;
             }
-            case 42: {
+            case 50: {
               com.twilio.open.protocol.Calls.SignalingEvent.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000010) == 0x00000010)) {
+              if (((bitField0_ & 0x00000020) == 0x00000020)) {
                 subBuilder = signalingEvent_.toBuilder();
               }
               signalingEvent_ = input.readMessage(com.twilio.open.protocol.Calls.SignalingEvent.PARSER, extensionRegistry);
@@ -2694,7 +2787,20 @@ public final class Calls {
                 subBuilder.mergeFrom(signalingEvent_);
                 signalingEvent_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000020;
+              break;
+            }
+            case 58: {
+              com.twilio.open.protocol.Calls.Dimensions.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000040) == 0x00000040)) {
+                subBuilder = eventDimensions_.toBuilder();
+              }
+              eventDimensions_ = input.readMessage(com.twilio.open.protocol.Calls.Dimensions.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(eventDimensions_);
+                eventDimensions_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000040;
               break;
             }
           }
@@ -2837,20 +2943,74 @@ public final class Calls {
       }
     }
 
-    public static final int EVENT_TYPE_FIELD_NUMBER = 4;
+    public static final int ROUTE_ID_FIELD_NUMBER = 4;
+    private java.lang.Object routeId_;
+    /**
+     * <code>optional string route_id = 4;</code>
+     *
+     * <pre>
+     * encapsulates a logical end to end route
+     * </pre>
+     */
+    public boolean hasRouteId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string route_id = 4;</code>
+     *
+     * <pre>
+     * encapsulates a logical end to end route
+     * </pre>
+     */
+    public java.lang.String getRouteId() {
+      java.lang.Object ref = routeId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          routeId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string route_id = 4;</code>
+     *
+     * <pre>
+     * encapsulates a logical end to end route
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getRouteIdBytes() {
+      java.lang.Object ref = routeId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        routeId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int EVENT_TYPE_FIELD_NUMBER = 5;
     private com.twilio.open.protocol.Calls.CallEventType eventType_;
     /**
-     * <code>optional .CallEventType event_type = 4;</code>
+     * <code>optional .CallEventType event_type = 5;</code>
      *
      * <pre>
      * used to store multiple types in this single extensible wrapper
      * </pre>
      */
     public boolean hasEventType() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional .CallEventType event_type = 4;</code>
+     * <code>optional .CallEventType event_type = 5;</code>
      *
      * <pre>
      * used to store multiple types in this single extensible wrapper
@@ -2860,20 +3020,20 @@ public final class Calls {
       return eventType_;
     }
 
-    public static final int SIGNALING_EVENT_FIELD_NUMBER = 5;
+    public static final int SIGNALING_EVENT_FIELD_NUMBER = 6;
     private com.twilio.open.protocol.Calls.SignalingEvent signalingEvent_;
     /**
-     * <code>optional .SignalingEvent signaling_event = 5;</code>
+     * <code>optional .SignalingEvent signaling_event = 6;</code>
      *
      * <pre>
      * when event type is signaling_event this is available
      * </pre>
      */
     public boolean hasSignalingEvent() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional .SignalingEvent signaling_event = 5;</code>
+     * <code>optional .SignalingEvent signaling_event = 6;</code>
      *
      * <pre>
      * when event type is signaling_event this is available
@@ -2883,7 +3043,7 @@ public final class Calls {
       return signalingEvent_;
     }
     /**
-     * <code>optional .SignalingEvent signaling_event = 5;</code>
+     * <code>optional .SignalingEvent signaling_event = 6;</code>
      *
      * <pre>
      * when event type is signaling_event this is available
@@ -2893,12 +3053,47 @@ public final class Calls {
       return signalingEvent_;
     }
 
+    public static final int EVENT_DIMENSIONS_FIELD_NUMBER = 7;
+    private com.twilio.open.protocol.Calls.Dimensions eventDimensions_;
+    /**
+     * <code>optional .Dimensions event_dimensions = 7;</code>
+     *
+     * <pre>
+     * use with the event_type and logical window to generate a strong groupingHashKey
+     * </pre>
+     */
+    public boolean hasEventDimensions() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional .Dimensions event_dimensions = 7;</code>
+     *
+     * <pre>
+     * use with the event_type and logical window to generate a strong groupingHashKey
+     * </pre>
+     */
+    public com.twilio.open.protocol.Calls.Dimensions getEventDimensions() {
+      return eventDimensions_;
+    }
+    /**
+     * <code>optional .Dimensions event_dimensions = 7;</code>
+     *
+     * <pre>
+     * use with the event_type and logical window to generate a strong groupingHashKey
+     * </pre>
+     */
+    public com.twilio.open.protocol.Calls.DimensionsOrBuilder getEventDimensionsOrBuilder() {
+      return eventDimensions_;
+    }
+
     private void initFields() {
       eventTime_ = 0L;
       loggedEventTime_ = 0L;
       eventId_ = "";
+      routeId_ = "";
       eventType_ = com.twilio.open.protocol.Calls.CallEventType.unknown_call_event;
       signalingEvent_ = com.twilio.open.protocol.Calls.SignalingEvent.getDefaultInstance();
+      eventDimensions_ = com.twilio.open.protocol.Calls.Dimensions.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2923,10 +3118,16 @@ public final class Calls {
         output.writeBytes(3, getEventIdBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeEnum(4, eventType_.getNumber());
+        output.writeBytes(4, getRouteIdBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeMessage(5, signalingEvent_);
+        output.writeEnum(5, eventType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeMessage(6, signalingEvent_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeMessage(7, eventDimensions_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2951,11 +3152,19 @@ public final class Calls {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, eventType_.getNumber());
+          .computeBytesSize(4, getRouteIdBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, signalingEvent_);
+          .computeEnumSize(5, eventType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, signalingEvent_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, eventDimensions_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3067,6 +3276,7 @@ public final class Calls {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSignalingEventFieldBuilder();
+          getEventDimensionsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3081,14 +3291,22 @@ public final class Calls {
         bitField0_ = (bitField0_ & ~0x00000002);
         eventId_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        eventType_ = com.twilio.open.protocol.Calls.CallEventType.unknown_call_event;
+        routeId_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
+        eventType_ = com.twilio.open.protocol.Calls.CallEventType.unknown_call_event;
+        bitField0_ = (bitField0_ & ~0x00000010);
         if (signalingEventBuilder_ == null) {
           signalingEvent_ = com.twilio.open.protocol.Calls.SignalingEvent.getDefaultInstance();
         } else {
           signalingEventBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
+        if (eventDimensionsBuilder_ == null) {
+          eventDimensions_ = com.twilio.open.protocol.Calls.Dimensions.getDefaultInstance();
+        } else {
+          eventDimensionsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -3132,14 +3350,26 @@ public final class Calls {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.eventType_ = eventType_;
+        result.routeId_ = routeId_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
+        }
+        result.eventType_ = eventType_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
         }
         if (signalingEventBuilder_ == null) {
           result.signalingEvent_ = signalingEvent_;
         } else {
           result.signalingEvent_ = signalingEventBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        if (eventDimensionsBuilder_ == null) {
+          result.eventDimensions_ = eventDimensions_;
+        } else {
+          result.eventDimensions_ = eventDimensionsBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -3168,11 +3398,19 @@ public final class Calls {
           eventId_ = other.eventId_;
           onChanged();
         }
+        if (other.hasRouteId()) {
+          bitField0_ |= 0x00000008;
+          routeId_ = other.routeId_;
+          onChanged();
+        }
         if (other.hasEventType()) {
           setEventType(other.getEventType());
         }
         if (other.hasSignalingEvent()) {
           mergeSignalingEvent(other.getSignalingEvent());
+        }
+        if (other.hasEventDimensions()) {
+          mergeEventDimensions(other.getEventDimensions());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3397,19 +3635,119 @@ public final class Calls {
         return this;
       }
 
+      private java.lang.Object routeId_ = "";
+      /**
+       * <code>optional string route_id = 4;</code>
+       *
+       * <pre>
+       * encapsulates a logical end to end route
+       * </pre>
+       */
+      public boolean hasRouteId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string route_id = 4;</code>
+       *
+       * <pre>
+       * encapsulates a logical end to end route
+       * </pre>
+       */
+      public java.lang.String getRouteId() {
+        java.lang.Object ref = routeId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            routeId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string route_id = 4;</code>
+       *
+       * <pre>
+       * encapsulates a logical end to end route
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getRouteIdBytes() {
+        java.lang.Object ref = routeId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          routeId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string route_id = 4;</code>
+       *
+       * <pre>
+       * encapsulates a logical end to end route
+       * </pre>
+       */
+      public Builder setRouteId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        routeId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string route_id = 4;</code>
+       *
+       * <pre>
+       * encapsulates a logical end to end route
+       * </pre>
+       */
+      public Builder clearRouteId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        routeId_ = getDefaultInstance().getRouteId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string route_id = 4;</code>
+       *
+       * <pre>
+       * encapsulates a logical end to end route
+       * </pre>
+       */
+      public Builder setRouteIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        routeId_ = value;
+        onChanged();
+        return this;
+      }
+
       private com.twilio.open.protocol.Calls.CallEventType eventType_ = com.twilio.open.protocol.Calls.CallEventType.unknown_call_event;
       /**
-       * <code>optional .CallEventType event_type = 4;</code>
+       * <code>optional .CallEventType event_type = 5;</code>
        *
        * <pre>
        * used to store multiple types in this single extensible wrapper
        * </pre>
        */
       public boolean hasEventType() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional .CallEventType event_type = 4;</code>
+       * <code>optional .CallEventType event_type = 5;</code>
        *
        * <pre>
        * used to store multiple types in this single extensible wrapper
@@ -3419,7 +3757,7 @@ public final class Calls {
         return eventType_;
       }
       /**
-       * <code>optional .CallEventType event_type = 4;</code>
+       * <code>optional .CallEventType event_type = 5;</code>
        *
        * <pre>
        * used to store multiple types in this single extensible wrapper
@@ -3429,20 +3767,20 @@ public final class Calls {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         eventType_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .CallEventType event_type = 4;</code>
+       * <code>optional .CallEventType event_type = 5;</code>
        *
        * <pre>
        * used to store multiple types in this single extensible wrapper
        * </pre>
        */
       public Builder clearEventType() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         eventType_ = com.twilio.open.protocol.Calls.CallEventType.unknown_call_event;
         onChanged();
         return this;
@@ -3452,17 +3790,17 @@ public final class Calls {
       private com.google.protobuf.SingleFieldBuilder<
           com.twilio.open.protocol.Calls.SignalingEvent, com.twilio.open.protocol.Calls.SignalingEvent.Builder, com.twilio.open.protocol.Calls.SignalingEventOrBuilder> signalingEventBuilder_;
       /**
-       * <code>optional .SignalingEvent signaling_event = 5;</code>
+       * <code>optional .SignalingEvent signaling_event = 6;</code>
        *
        * <pre>
        * when event type is signaling_event this is available
        * </pre>
        */
       public boolean hasSignalingEvent() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional .SignalingEvent signaling_event = 5;</code>
+       * <code>optional .SignalingEvent signaling_event = 6;</code>
        *
        * <pre>
        * when event type is signaling_event this is available
@@ -3476,7 +3814,7 @@ public final class Calls {
         }
       }
       /**
-       * <code>optional .SignalingEvent signaling_event = 5;</code>
+       * <code>optional .SignalingEvent signaling_event = 6;</code>
        *
        * <pre>
        * when event type is signaling_event this is available
@@ -3492,11 +3830,11 @@ public final class Calls {
         } else {
           signalingEventBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional .SignalingEvent signaling_event = 5;</code>
+       * <code>optional .SignalingEvent signaling_event = 6;</code>
        *
        * <pre>
        * when event type is signaling_event this is available
@@ -3510,11 +3848,11 @@ public final class Calls {
         } else {
           signalingEventBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional .SignalingEvent signaling_event = 5;</code>
+       * <code>optional .SignalingEvent signaling_event = 6;</code>
        *
        * <pre>
        * when event type is signaling_event this is available
@@ -3522,7 +3860,7 @@ public final class Calls {
        */
       public Builder mergeSignalingEvent(com.twilio.open.protocol.Calls.SignalingEvent value) {
         if (signalingEventBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+          if (((bitField0_ & 0x00000020) == 0x00000020) &&
               signalingEvent_ != com.twilio.open.protocol.Calls.SignalingEvent.getDefaultInstance()) {
             signalingEvent_ =
               com.twilio.open.protocol.Calls.SignalingEvent.newBuilder(signalingEvent_).mergeFrom(value).buildPartial();
@@ -3533,11 +3871,11 @@ public final class Calls {
         } else {
           signalingEventBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional .SignalingEvent signaling_event = 5;</code>
+       * <code>optional .SignalingEvent signaling_event = 6;</code>
        *
        * <pre>
        * when event type is signaling_event this is available
@@ -3550,23 +3888,23 @@ public final class Calls {
         } else {
           signalingEventBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       /**
-       * <code>optional .SignalingEvent signaling_event = 5;</code>
+       * <code>optional .SignalingEvent signaling_event = 6;</code>
        *
        * <pre>
        * when event type is signaling_event this is available
        * </pre>
        */
       public com.twilio.open.protocol.Calls.SignalingEvent.Builder getSignalingEventBuilder() {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         onChanged();
         return getSignalingEventFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .SignalingEvent signaling_event = 5;</code>
+       * <code>optional .SignalingEvent signaling_event = 6;</code>
        *
        * <pre>
        * when event type is signaling_event this is available
@@ -3580,7 +3918,7 @@ public final class Calls {
         }
       }
       /**
-       * <code>optional .SignalingEvent signaling_event = 5;</code>
+       * <code>optional .SignalingEvent signaling_event = 6;</code>
        *
        * <pre>
        * when event type is signaling_event this is available
@@ -3598,6 +3936,158 @@ public final class Calls {
           signalingEvent_ = null;
         }
         return signalingEventBuilder_;
+      }
+
+      private com.twilio.open.protocol.Calls.Dimensions eventDimensions_ = com.twilio.open.protocol.Calls.Dimensions.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.twilio.open.protocol.Calls.Dimensions, com.twilio.open.protocol.Calls.Dimensions.Builder, com.twilio.open.protocol.Calls.DimensionsOrBuilder> eventDimensionsBuilder_;
+      /**
+       * <code>optional .Dimensions event_dimensions = 7;</code>
+       *
+       * <pre>
+       * use with the event_type and logical window to generate a strong groupingHashKey
+       * </pre>
+       */
+      public boolean hasEventDimensions() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional .Dimensions event_dimensions = 7;</code>
+       *
+       * <pre>
+       * use with the event_type and logical window to generate a strong groupingHashKey
+       * </pre>
+       */
+      public com.twilio.open.protocol.Calls.Dimensions getEventDimensions() {
+        if (eventDimensionsBuilder_ == null) {
+          return eventDimensions_;
+        } else {
+          return eventDimensionsBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .Dimensions event_dimensions = 7;</code>
+       *
+       * <pre>
+       * use with the event_type and logical window to generate a strong groupingHashKey
+       * </pre>
+       */
+      public Builder setEventDimensions(com.twilio.open.protocol.Calls.Dimensions value) {
+        if (eventDimensionsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          eventDimensions_ = value;
+          onChanged();
+        } else {
+          eventDimensionsBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .Dimensions event_dimensions = 7;</code>
+       *
+       * <pre>
+       * use with the event_type and logical window to generate a strong groupingHashKey
+       * </pre>
+       */
+      public Builder setEventDimensions(
+          com.twilio.open.protocol.Calls.Dimensions.Builder builderForValue) {
+        if (eventDimensionsBuilder_ == null) {
+          eventDimensions_ = builderForValue.build();
+          onChanged();
+        } else {
+          eventDimensionsBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .Dimensions event_dimensions = 7;</code>
+       *
+       * <pre>
+       * use with the event_type and logical window to generate a strong groupingHashKey
+       * </pre>
+       */
+      public Builder mergeEventDimensions(com.twilio.open.protocol.Calls.Dimensions value) {
+        if (eventDimensionsBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040) &&
+              eventDimensions_ != com.twilio.open.protocol.Calls.Dimensions.getDefaultInstance()) {
+            eventDimensions_ =
+              com.twilio.open.protocol.Calls.Dimensions.newBuilder(eventDimensions_).mergeFrom(value).buildPartial();
+          } else {
+            eventDimensions_ = value;
+          }
+          onChanged();
+        } else {
+          eventDimensionsBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>optional .Dimensions event_dimensions = 7;</code>
+       *
+       * <pre>
+       * use with the event_type and logical window to generate a strong groupingHashKey
+       * </pre>
+       */
+      public Builder clearEventDimensions() {
+        if (eventDimensionsBuilder_ == null) {
+          eventDimensions_ = com.twilio.open.protocol.Calls.Dimensions.getDefaultInstance();
+          onChanged();
+        } else {
+          eventDimensionsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+      /**
+       * <code>optional .Dimensions event_dimensions = 7;</code>
+       *
+       * <pre>
+       * use with the event_type and logical window to generate a strong groupingHashKey
+       * </pre>
+       */
+      public com.twilio.open.protocol.Calls.Dimensions.Builder getEventDimensionsBuilder() {
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return getEventDimensionsFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .Dimensions event_dimensions = 7;</code>
+       *
+       * <pre>
+       * use with the event_type and logical window to generate a strong groupingHashKey
+       * </pre>
+       */
+      public com.twilio.open.protocol.Calls.DimensionsOrBuilder getEventDimensionsOrBuilder() {
+        if (eventDimensionsBuilder_ != null) {
+          return eventDimensionsBuilder_.getMessageOrBuilder();
+        } else {
+          return eventDimensions_;
+        }
+      }
+      /**
+       * <code>optional .Dimensions event_dimensions = 7;</code>
+       *
+       * <pre>
+       * use with the event_type and logical window to generate a strong groupingHashKey
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.twilio.open.protocol.Calls.Dimensions, com.twilio.open.protocol.Calls.Dimensions.Builder, com.twilio.open.protocol.Calls.DimensionsOrBuilder> 
+          getEventDimensionsFieldBuilder() {
+        if (eventDimensionsBuilder_ == null) {
+          eventDimensionsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.twilio.open.protocol.Calls.Dimensions, com.twilio.open.protocol.Calls.Dimensions.Builder, com.twilio.open.protocol.Calls.DimensionsOrBuilder>(
+                  getEventDimensions(),
+                  getParentForChildren(),
+                  isClean());
+          eventDimensions_ = null;
+        }
+        return eventDimensionsBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:CallEvent)
@@ -3641,6 +4131,20 @@ public final class Calls {
      * <code>optional .Carrier carrier = 3;</code>
      */
     com.twilio.open.protocol.Calls.Carrier getCarrier();
+
+    /**
+     * <code>optional string route = 4;</code>
+     */
+    boolean hasRoute();
+    /**
+     * <code>optional string route = 4;</code>
+     */
+    java.lang.String getRoute();
+    /**
+     * <code>optional string route = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getRouteBytes();
   }
   /**
    * Protobuf type {@code Dimensions}
@@ -3725,6 +4229,12 @@ public final class Calls {
                 bitField0_ |= 0x00000004;
                 carrier_ = value;
               }
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              route_ = bs;
               break;
             }
           }
@@ -3812,10 +4322,53 @@ public final class Calls {
       return carrier_;
     }
 
+    public static final int ROUTE_FIELD_NUMBER = 4;
+    private java.lang.Object route_;
+    /**
+     * <code>optional string route = 4;</code>
+     */
+    public boolean hasRoute() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string route = 4;</code>
+     */
+    public java.lang.String getRoute() {
+      java.lang.Object ref = route_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          route_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string route = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRouteBytes() {
+      java.lang.Object ref = route_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        route_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       country_ = com.twilio.open.protocol.Calls.Country.unknown_country;
       direction_ = com.twilio.open.protocol.Calls.Direction.unknown_direction;
       carrier_ = com.twilio.open.protocol.Calls.Carrier.unknown_carrier;
+      route_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3839,6 +4392,9 @@ public final class Calls {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeEnum(3, carrier_.getNumber());
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getRouteBytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -3859,6 +4415,10 @@ public final class Calls {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, carrier_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getRouteBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3983,6 +4543,8 @@ public final class Calls {
         bitField0_ = (bitField0_ & ~0x00000002);
         carrier_ = com.twilio.open.protocol.Calls.Carrier.unknown_carrier;
         bitField0_ = (bitField0_ & ~0x00000004);
+        route_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -4023,6 +4585,10 @@ public final class Calls {
           to_bitField0_ |= 0x00000004;
         }
         result.carrier_ = carrier_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.route_ = route_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4047,6 +4613,11 @@ public final class Calls {
         }
         if (other.hasCarrier()) {
           setCarrier(other.getCarrier());
+        }
+        if (other.hasRoute()) {
+          bitField0_ |= 0x00000008;
+          route_ = other.route_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4180,6 +4751,82 @@ public final class Calls {
         return this;
       }
 
+      private java.lang.Object route_ = "";
+      /**
+       * <code>optional string route = 4;</code>
+       */
+      public boolean hasRoute() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string route = 4;</code>
+       */
+      public java.lang.String getRoute() {
+        java.lang.Object ref = route_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            route_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string route = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRouteBytes() {
+        java.lang.Object ref = route_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          route_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string route = 4;</code>
+       */
+      public Builder setRoute(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        route_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string route = 4;</code>
+       */
+      public Builder clearRoute() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        route_ = getDefaultInstance().getRoute();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string route = 4;</code>
+       */
+      public Builder setRouteBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        route_ = value;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:Dimensions)
     }
 
@@ -4230,27 +4877,30 @@ public final class Calls {
       "entType\022\026\n\003pdd\030\003 \001(\0132\t.PddEvent\022#\n\ncall_" +
       "state\030\004 \001(\0132\017.CallStateEvent\"\027\n\010PddEvent" +
       "\022\013\n\003pdd\030\001 \001(\002\"+\n\016CallStateEvent\022\031\n\005state" +
-      "\030\001 \001(\0162\n.CallState\"\232\001\n\tCallEvent\022\022\n\neven" +
+      "\030\001 \001(\0162\n.CallState\"\323\001\n\tCallEvent\022\022\n\neven" +
       "t_time\030\001 \001(\004\022\031\n\021logged_event_time\030\002 \001(\004\022" +
-      "\020\n\010event_id\030\003 \001(\t\022\"\n\nevent_type\030\004 \001(\0162\016." +
-      "CallEventType\022(\n\017signaling_event\030\005 \001(\0132\017" +
-      ".SignalingEvent\"a\n\nDimensions\022\031\n\007country",
-      "\030\001 \001(\0162\010.Country\022\035\n\tdirection\030\002 \001(\0162\n.Di" +
-      "rection\022\031\n\007carrier\030\003 \001(\0162\010.Carrier*k\n\tCa" +
-      "llState\022\026\n\022unknown_call_state\020\000\022\017\n\013initi" +
-      "alized\020\001\022\014\n\010answered\020\002\022\014\n\010progress\020\003\022\r\n\t" +
-      "completed\020\004\022\n\n\006failed\020\005*E\n\022SignalingEven" +
-      "tType\022\026\n\022unknown_event_type\020\000\022\007\n\003pdd\020\001\022\016" +
-      "\n\ncall_state\020\002*<\n\rCallEventType\022\026\n\022unkno" +
-      "wn_call_event\020\000\022\023\n\017signaling_event\020\001*n\n\007" +
-      "Country\022\023\n\017unknown_country\020\000\022\006\n\002br\020\001\022\006\n\002" +
-      "ca\020\002\022\006\n\002cl\020\003\022\006\n\002fr\020\004\022\006\n\002gb\020\005\022\006\n\002in\020\006\022\006\n\002",
-      "it\020\007\022\006\n\002mx\020\010\022\006\n\002nl\020\t\022\006\n\002us\020\n*=\n\tDirectio" +
-      "n\022\025\n\021unknown_direction\020\000\022\013\n\007inbound\020\001\022\014\n" +
-      "\010outbound\020\002*_\n\007Carrier\022\023\n\017unknown_carrie" +
-      "r\020\000\022\013\n\007telco_a\020\001\022\013\n\007telco_b\020\002\022\013\n\007telco_c" +
-      "\020\003\022\013\n\007telco_d\020\004\022\013\n\007telco_e\020\005B!\n\030com.twil" +
-      "io.open.protocolB\005Calls"
+      "\020\n\010event_id\030\003 \001(\t\022\020\n\010route_id\030\004 \001(\t\022\"\n\ne" +
+      "vent_type\030\005 \001(\0162\016.CallEventType\022(\n\017signa" +
+      "ling_event\030\006 \001(\0132\017.SignalingEvent\022%\n\020eve",
+      "nt_dimensions\030\007 \001(\0132\013.Dimensions\"p\n\nDime" +
+      "nsions\022\031\n\007country\030\001 \001(\0162\010.Country\022\035\n\tdir" +
+      "ection\030\002 \001(\0162\n.Direction\022\031\n\007carrier\030\003 \001(" +
+      "\0162\010.Carrier\022\r\n\005route\030\004 \001(\t*\236\001\n\tCallState" +
+      "\022\026\n\022unknown_call_state\020\000\022\017\n\013initialized\020" +
+      "\001\022\013\n\007ringing\020\002\022\014\n\010answered\020\003\022\014\n\010progress" +
+      "\020\004\022\r\n\tcompleted\020\005\022\n\n\006failed\020\006\022\010\n\004busy\020\007\022" +
+      "\014\n\010noanswer\020\010\022\014\n\010canceled\020\t*E\n\022Signaling" +
+      "EventType\022\026\n\022unknown_event_type\020\000\022\007\n\003pdd" +
+      "\020\001\022\016\n\ncall_state\020\002*<\n\rCallEventType\022\026\n\022u",
+      "nknown_call_event\020\000\022\023\n\017signaling_event\020\001" +
+      "*n\n\007Country\022\023\n\017unknown_country\020\000\022\006\n\002br\020\001" +
+      "\022\006\n\002ca\020\002\022\006\n\002cl\020\003\022\006\n\002fr\020\004\022\006\n\002gb\020\005\022\006\n\002in\020\006" +
+      "\022\006\n\002it\020\007\022\006\n\002mx\020\010\022\006\n\002nl\020\t\022\006\n\002us\020\n*=\n\tDire" +
+      "ction\022\025\n\021unknown_direction\020\000\022\013\n\007inbound\020" +
+      "\001\022\014\n\010outbound\020\002*_\n\007Carrier\022\023\n\017unknown_ca" +
+      "rrier\020\000\022\013\n\007telco_a\020\001\022\013\n\007telco_b\020\002\022\013\n\007tel" +
+      "co_c\020\003\022\013\n\007telco_d\020\004\022\013\n\007telco_e\020\005B!\n\030com." +
+      "twilio.open.protocolB\005Calls"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4287,13 +4937,13 @@ public final class Calls {
     internal_static_CallEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_CallEvent_descriptor,
-        new java.lang.String[] { "EventTime", "LoggedEventTime", "EventId", "EventType", "SignalingEvent", });
+        new java.lang.String[] { "EventTime", "LoggedEventTime", "EventId", "RouteId", "EventType", "SignalingEvent", "EventDimensions", });
     internal_static_Dimensions_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_Dimensions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_Dimensions_descriptor,
-        new java.lang.String[] { "Country", "Direction", "Carrier", });
+        new java.lang.String[] { "Country", "Direction", "Carrier", "Route", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

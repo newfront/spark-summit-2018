@@ -1,0 +1,291 @@
+{
+  "input": [
+    {
+      "event_time": 1527966284972,
+      "logged_event_time": 1527966304972,
+      "event_id": "PDD1",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 2.8 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966285972,
+      "logged_event_time": 1527966285982,
+      "event_id": "PDD2",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 1.7 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966285972,
+      "logged_event_time": 1527966285982,
+      "event_id": "PDD2a",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 2.2 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966285972,
+      "logged_event_time": 1527966285982,
+      "event_id": "PDD2b",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 0.7 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966286972,
+      "logged_event_time": 1527966287072,
+      "event_id": "PDD3",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 4.8 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966287972,
+      "logged_event_time": 1527966288072,
+      "event_id": "PDD4",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 0.8 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966288972,
+      "logged_event_time": 1527966289972,
+      "event_id": "PDD5",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 3.8 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966289972,
+      "logged_event_time": 1527966290972,
+      "event_id": "PDD6",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 2.2 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966290972,
+      "logged_event_time": 1527966290972,
+      "event_id": "PDD7",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 2.7 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966291972,
+      "logged_event_time": 1527966291972,
+      "event_id": "PDD8",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 10.1 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966292972,
+      "logged_event_time": 1527966292972,
+      "event_id": "PDD9",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 1.1 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966293972,
+      "logged_event_time": 1527966293972,
+      "event_id": "PDD10",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 2.1 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966353972,
+      "logged_event_time": 1527966353972,
+      "event_id": "PDD11",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 1.1 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966354972,
+      "logged_event_time": 1527966354972,
+      "event_id": "PDD12",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 1.3 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966414972,
+      "logged_event_time": 1527966414972,
+      "event_id": "PDD13",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 1.8 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966474972,
+      "logged_event_time": 1527966474972,
+      "event_id": "PDD14",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 3.9 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966534972,
+      "logged_event_time": 1527966534972,
+      "event_id": "PDD15",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 1.9 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966594972,
+      "logged_event_time": 1527966594972,
+      "event_id": "PDD16",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 2.9 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966654972,
+      "logged_event_time": 1527966654972,
+      "event_id": "PDD17",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 1.9 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527966654972,
+      "logged_event_time": 1527966654972,
+      "event_id": "PDD17",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 1.9 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527967254972,
+      "logged_event_time": 1527967254972,
+      "event_id": "PDD18-push-watermark",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 5.9 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    },
+    {
+      "event_time": 1527968454972,
+      "logged_event_time": 1527968454972,
+      "event_id": "PDD19-force-watermark",
+      "route_id": "RI1",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "preflight",
+        "event_type": "pdd",
+        "pdd": { "pdd": 10.9 }
+      },
+      "event_dimensions": { "country": "us", "direction": "outbound", "carrier": "telco_a", "route": "RI1" }
+    }
+
+  ]
+}

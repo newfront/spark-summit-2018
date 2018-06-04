@@ -1,6 +1,6 @@
 package com.twilio.open.streaming.trend.discovery
 
-import com.twilio.open.streaming.trend.discovery.config.AppConfiguration
+import com.twilio.open.streaming.trend.discovery.config.{AppConfig, AppConfiguration}
 import com.twilio.open.streaming.trend.discovery.listeners.SparkApplicationListener
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.streaming.{DataStreamReader, Trigger}
@@ -16,12 +16,12 @@ object TrendDiscoveryApp {
   def main(args: Array[String]): Unit = {
     logger.info(s"application arguments: $args")
     assert(args.length > 0, "No application config supplied to app args")
-    val config = AppConfiguration(args(0))
+    val config = AppConfig(args(0))
 
     val sparkConf = new SparkConf()
       .setAppName(config.appName)
       .setJars(SparkContext.jarOfClass(classOf[TrendDiscoveryApp]).toList)
-      .setAll(config.sparkConfig)
+      .setAll(config.sparkCoreConfig)
 
     logger.info(s"sparkConfig: ${sparkConf.toDebugString}")
 
@@ -54,9 +54,10 @@ class TrendDiscoveryApp(override val config: AppConfiguration, override val spar
     .option("startingOffsets", """{"topic1":{"0":23,"1":-2},"topic2":{"0":-2}}""")
     .option("endingOffsets", """{"topic1":{"0":50,"1":-1},"topic2":{"0":-1}}""")
      */
-    val kafkaConfig = config.kafkaDataStreamReader
+    val kafkaConfig = config.callEventsTopic
 
     val reader = spark.readStream.format("kafka")
+
     kafkaConfig.conf.foreach { entry =>
       reader.option(entry._1, entry._2)
     }

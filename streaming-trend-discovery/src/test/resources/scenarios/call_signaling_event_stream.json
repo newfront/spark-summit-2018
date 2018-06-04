@@ -1,0 +1,112 @@
+{
+  "input": [
+    {
+      "event_time": 1527966284972,
+      "logged_event_time": 1527966304972,
+      "event_id": "CE1234",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "state_change",
+        "event_type": "call_state",
+        "call_state": {
+          "state": "initialized"
+        }
+      },
+      "event_dimensions": {
+        "country": "us",
+        "direction": "outbound",
+        "carrier": "telco_a"
+      }
+    },
+    {
+      "event_time": 1527966285972,
+      "logged_event_time": 1527966286972,
+      "event_id": "CE1234",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "state_change",
+        "event_type": "call_state",
+        "call_state": {
+          "state": "ringing"
+        }
+      },
+      "event_dimensions": {
+        "country": "us",
+        "direction": "outbound",
+        "carrier": "telco_a"
+      }
+    },
+    {
+      "event_time": 1527966287972,
+      "logged_event_time": 1527966288972,
+      "event_id": "CE1234",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "state_change",
+        "event_type": "call_state",
+        "call_state": {
+          "state": "answered"
+        }
+      },
+      "event_dimensions": {
+        "country": "us",
+        "direction": "outbound",
+        "carrier": "telco_a"
+      }
+    },
+    {
+      "event_time": 1527966288972,
+      "logged_event_time": 1527966289972,
+      "event_id": "CE1234",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "progress",
+        "event_type": "call_state",
+        "call_state": {
+          "state": "progress"
+        }
+      },
+      "event_dimensions": {
+        "country": "us",
+        "direction": "outbound",
+        "carrier": "telco_a"
+      }
+    },
+    {
+      "event_time": 1527966289972,
+      "logged_event_time": 1527966309972,
+      "event_id": "CE1234",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "progress",
+        "event_type": "call_state",
+        "call_state": {
+          "state": "progress"
+        }
+      },
+      "event_dimensions": {
+        "country": "us",
+        "direction": "outbound",
+        "carrier": "telco_a"
+      }
+    },
+    {
+      "event_time": 1527966294972,
+      "logged_event_time": 1527966294972,
+      "event_id": "CE1234",
+      "event_type": "signaling_event",
+      "signaling_event": {
+        "name": "state_change",
+        "event_type": "call_state",
+        "call_state": {
+          "state": "completed"
+        }
+      },
+      "event_dimensions": {
+        "country": "us",
+        "direction": "outbound",
+        "carrier": "telco_a"
+      }
+    }
+  ]
+}

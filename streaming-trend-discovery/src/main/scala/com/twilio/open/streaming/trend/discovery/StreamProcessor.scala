@@ -1,10 +1,9 @@
 package com.twilio.open.streaming.trend.discovery
 
-import org.apache.spark.sql.{DataFrame, SparkSession}
-import org.apache.spark.sql.streaming.DataStreamWriter
+import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
 
-trait StreamProcessor[T <: Product] extends Product with Serializable {
+trait StreamProcessor[T] extends Serializable {
 
-  def process(df: DataFrame)(implicit spark: SparkSession): DataStreamWriter[T]
+  def process(df: DataFrame)(implicit spark: SparkSession): Dataset[T]
 
 }
