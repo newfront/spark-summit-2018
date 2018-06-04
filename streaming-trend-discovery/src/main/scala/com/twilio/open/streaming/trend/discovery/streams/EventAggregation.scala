@@ -123,21 +123,22 @@ case class EventAggregation(config: AppConfiguration) extends Serializable {
     implicit val metricAggsEncoder: ExpressionEncoder[MetricAggregation] = EventAggregation.implicits.aggreationEncoder
     val watermarkInterval = config.watermarkIntervalMinutes
 
-    // 1. Convert from the kafka data frame to an instance of our CallEvent
+    // 1. Convert from the kafka data frame to an instance of our Metric
     val groupedMetrics = df.mapPartitions(
       _.flatMap { kd =>
         bytesToMetricRow(kd.getAs[Array[Byte]]("value"), windowInterval)
       }
     )(metricEncoder)
 
+    // 1b. apply watermark to ditch updates to said record state and allow for eventual timeout
+    // 2. groupBy binary key
+    // 3. aggregate the value of the metric
+    // 4. output the final aggregations
     logger.info(s"aggregation outputMode=$outputMode windowIntervalMinutes=${config.windowIntervalMinutes} watermarkIntervalMinutes=$watermarkInterval")
-    val aggregation = groupedMetrics
+    groupedMetrics
       .withWatermark("timestamp", s"${config.watermarkIntervalMinutes} minutes")
-      .groupByKey { _.metricAggregation }
+      .groupByKey(_.metricAggregation)
       .flatMapGroupsWithState[Array[Byte], MetricAggregation](outputMode, GroupStateTimeout.EventTimeTimeout())(metricAggregator)
-
-    aggregation
-
   }
 
   def metricAggregator(metricAggregation: Array[Byte], metrics: Iterator[ProductMetric], state: GroupState[Array[Byte]]): Iterator[MetricAggregation] = {

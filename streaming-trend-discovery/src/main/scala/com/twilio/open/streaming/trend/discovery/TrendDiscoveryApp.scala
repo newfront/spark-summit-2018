@@ -2,6 +2,7 @@ package com.twilio.open.streaming.trend.discovery
 
 import com.twilio.open.streaming.trend.discovery.config.{AppConfig, AppConfiguration}
 import com.twilio.open.streaming.trend.discovery.listeners.SparkApplicationListener
+import com.twilio.open.streaming.trend.discovery.streams.EventAggregation
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.streaming.{DataStreamReader, Trigger}
 import org.apache.spark.{SparkConf, SparkContext}
@@ -72,14 +73,26 @@ class TrendDiscoveryApp(override val config: AppConfiguration, override val spar
   }
 
   override def run(): Unit = {
-    val triggerInterval = Duration(config.triggerInterval) // fully controllable outside of app
-    val processingTrigger = Trigger.ProcessingTime(triggerInterval) // use to control throughput
+    // creates a streaming query that will aggregate events from kafka
+    // and produce statistical histogram aggregations to be consumed downstream
+    val eventProcessor = EventAggregation(config)
+    val aggregationOutputStream = eventProcessor.process(readKafkaStream())(spark)
+      .writeStream
+      .queryName("streaming.trend.discovery")
+      .outputMode(eventProcessor.outputMode)
+      .trigger(Trigger.ProcessingTime(Duration(config.triggerInterval)))
+      .format("kafka")
+      .option("topic", "spark.summit.call.aggregations")
+      .options(Map(
+        "checkpointLocation" -> config.checkpointPath
+      ))
 
-    // create fresh instance of the TrendAggregator (configurable aggregator, 15m/30m)
-    // - foreachWriter -> redis (trends by metric, across dimensional hash)
-    // - kafkaWriter -> write aggregates for downstream use
-    // feed streaming data into fresh instance of TrendDetective   (broadcast updatable static DataFrame - from redis data)
-    // feed final trends and delta (prior n aggs) through p95 threshold (prior k windows) (high/low) -> take high and send to Kafka for processing
+    /*
+    config.kafkaProducer.conf.foreach { entry =>
+      aggregationOutputStream.option(entry._1, entry._2)
+    }
+     */
+    aggregationOutputStream.start()
   }
 
 }
