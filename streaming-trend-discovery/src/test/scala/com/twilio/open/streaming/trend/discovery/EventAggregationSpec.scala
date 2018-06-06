@@ -43,15 +43,10 @@ class EventAggregationSpec extends KafkaBackedTest[String, CallEvent] {
   }
 
   test("Should aggregate call events") {
-    implicit val kafkaDataFrameEncoder: Encoder[KafkaDataFrame] = Encoders.product[KafkaDataFrame]
-    implicit val sqlContext: SQLContext = session.sqlContext
-
+    import session.implicits._
     val appConfig = appConfigForTest()
     val scenario = TestHelper.loadScenario[CallEvent](s"$pathToTestScenarios/pdd_events.json")
-    val sortedScenario = scenario.sortBy(c => c.getEventTime)
-    val minTime = sortedScenario.minBy(c => c.getEventTime)
-    val maxTime = sortedScenario.maxBy(c => c.getEventTime)
-    val scenarioIter = sortedScenario.toIterator
+    val scenarioIter = scenario.toIterator
     scenario.nonEmpty shouldBe true
 
     testUtils.createTopic(kafkaTopic, partitions, overwrite = true)
@@ -65,13 +60,21 @@ class EventAggregationSpec extends KafkaBackedTest[String, CallEvent] {
       .queryName("calleventaggs")
       .format("memory")
       .outputMode(eventAggregation.outputMode)
-      //.trigger(Trigger.ProcessingTime("10 seconds"))
       .start()
       .processAllAvailable()
 
     val df = session.sql("select * from calleventaggs")
     df.printSchema()
-    df.show(false)
+    df.show
+
+    val res = session
+      .sql("select avg(stats.p99) from calleventaggs")
+      .collect()
+      .map { r =>
+        r.getAs[Double](0) }
+      .head
+
+    DiscoveryUtils.round(res) shouldEqual 7.13
 
   }
 
