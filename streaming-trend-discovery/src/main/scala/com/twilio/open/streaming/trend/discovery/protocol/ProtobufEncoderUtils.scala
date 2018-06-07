@@ -1,3 +1,8 @@
+/**
+ 2018 Voice Insights @ Twilio - Enjoy! twilio.com
+ Work done to extend the ExpressionEncoder for Google Protocol Buffers done first by Scott Haines and perfected by Marek Radonsky.
+ Shameless copy of the JavaBean Encoder from SPARK
+*/
 package com.twilio.open.streaming.trend.discovery.protocol
 
 import java.lang.{Iterable => JIterable}
